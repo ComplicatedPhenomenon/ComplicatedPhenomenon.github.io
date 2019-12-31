@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Add some features I urgently demand to my website.">
+<meta name="keywords" content="static site generator">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hands-on practice with hexo">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/01/19/hexo/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="Add some features I urgently demand to my website.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://media.giphy.com/media/11zy4ZYNN7n9Ju/giphy.gif">
+<meta property="og:image" content="https://complicatedphenomenon.gitlab.io/uploads/hexo.svg">
+<meta property="og:updated_time" content="2019-11-12T14:02:52.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hands-on practice with hexo">
+<meta name="twitter:description" content="Add some features I urgently demand to my website.">
+<meta name="twitter:image" content="https://media.giphy.com/media/11zy4ZYNN7n9Ju/giphy.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/01/19/hexo/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Hands-on practice with hexo | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/01/19/hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hands-on practice with hexo
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-19 08:31:06" itemprop="dateCreated datePublished" datetime="2018-01-19T08:31:06+08:00">2018-01-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-12 22:02:52" itemprop="dateModified" datetime="2019-11-12T22:02:52+08:00">2019-11-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Static-Site-Generator/" itemprop="url" rel="index"><span itemprop="name">Static Site Generator</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/19/hexo/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/19/hexo/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">Add some features I urgently demand to my website.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://media.giphy.com/media/11zy4ZYNN7n9Ju/giphy.gif" alt><br><a id="more"></a></p>
+<h2 id="Popular-frameworks-for-building-website"><a href="#Popular-frameworks-for-building-website" class="headerlink" title="Popular frameworks for building website"></a>Popular frameworks for building website</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Frameworks</th>
+<th><a href="https://www.djangoproject.com" target="_blank" rel="noopener">Django</a>  (It should be pelican to be  compared)</th>
+<th><a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a></th>
+<th><a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></th>
+<th><a href="http://gohugo.io" target="_blank" rel="noopener">Hugo</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Written in</td>
+<td>Python</td>
+<td>Ruby</td>
+<td>JavaScript</td>
+<td><a href="https://golang.org" target="_blank" rel="noopener">Go</a></td>
+</tr>
+<tr>
+<td>Used for</td>
+<td>creating web applications, that is, software, normally backed by a database, that includes some kind of interactivity, that operates through a browser</td>
+<td>Building static websites and blogs</td>
+<td>building Blog</td>
+<td>Building  any kind of website including blogs, tumbles, and docs</td>
+</tr>
+<tr>
+<td>A brief introduction</td>
+<td>A Framework provides a structure and common methods for making this kind of software.</td>
+<td>Jekyll is a simple, blog-aware, static site generator perfect for personal, project, or organization sites.</td>
+<td>Hexo is a fast, simple and powerful blog framework.</td>
+<td>Hugo is a static HTML and CSS website generator</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><del>The table is powered by <a href="http://www.tablesgenerator.com/markdown_tables" target="_blank" rel="noopener">tables generator</a></del></p>
+<p><font color="red">Caution:</font></p>
+<div class="note info"><p> 👽 We'd better visibly credit them on our site. Similar like Created using Sphinx 1.1.3. Design by Web y Limonada.</p></div>
+
+<h2 id="Figure-out-the-mechanism-behind-running-hexo"><a href="#Figure-out-the-mechanism-behind-running-hexo" class="headerlink" title="Figure out the mechanism behind running hexo"></a>Figure out the mechanism behind running hexo</h2><p><img src="/uploads/hexo.svg" alt><br>Download source code from <a href="/uploads/hexo.dot">here</a>.</p>
+<h2 id="Customize-your-theme"><a href="#Customize-your-theme" class="headerlink" title="Customize your theme"></a>Customize your theme</h2><ul>
+<li>You will screw up at first since you have poor knowledge, a heavy-weight, ugly configuration will be born.</li>
+<li>You will make it better since you are uncomfortable with it and you have a not bad taste.</li>
+</ul>
+<p>I use choose theme <em>next</em> since it is fully documented, many people has devoted their time to make its tutorial more reliable and <em>next</em> itself is powerful. You will configure it with clear instruction, so that the website you built is satisfying. Moreover, you enjoy the whole process.</p>
+<p>Below the <em>next</em> directory, you can edit</p>
+<ul>
+<li><code>_config.yml</code>　</li>
+<li><code>layout/_custom/XXX</code></li>
+<li><code>layout/_partials/footer.swig</code></li>
+<li><code>source/css/_custom/custom.styl</code></li>
+<li>…</li>
+</ul>
+<p>Useful reference:</p>
+<ul>
+<li><a href="https://reuixiy.github.io/technology/computer/computer-aided-art/2017/06/09/hexo-next-optimization.html" target="_blank" rel="noopener">打造个性超赞博客Hexo+NexT+GithubPages的超深度优化</a></li>
+<li><a href="http://cherryblog.site/Hexo-high-level-tutorialcloudmusic,bg-customthemes-statistical.html" target="_blank" rel="noopener">Hexo high level tutorial</a></li>
+<li><a href="http://shenzekun.cn/hexo的next主题个性化配置教程.html" target="_blank" rel="noopener">hexo的next主题个性化配置教程</a></li>
+</ul>
+<h3 id="Upgrade-theme-next"><a href="#Upgrade-theme-next" class="headerlink" title="Upgrade theme-next"></a>Upgrade theme-next</h3><p>Since I modify several files. When I want to upgrade next from <em>V5.1.4</em> to <em>V6.0</em>. It is a suffering. Installing a brand new one requires me to repeat what has been done before. So I just install a parallel one and compare the difference between these two repos. I didn’t find a workable way.</p>
+<p>Then I rename the previous <em>next</em>, and then install the new one, then I found the difference easily. <a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/UPDATE-FROM-5.1.X.md" target="_blank" rel="noopener">Instructions</a></p>
+<h3 id="Why-RSS-Benefits-and-Reasons-for-using-RSS"><a href="#Why-RSS-Benefits-and-Reasons-for-using-RSS" class="headerlink" title="Why RSS? Benefits and Reasons for using RSS"></a>Why RSS? Benefits and Reasons for using RSS</h3><p>RSS solves a problem for people who regularly use the web. It allows you to easily stay informed by retrieving the latest content from the sites you are interested in. You save time by not needing to visit each site individually. You ensure your privacy, by not needing to join each site’s email newsletter. The number of sites offering RSS feeds is growing rapidly and includes big names like Yahoo News.</p>
+<ul>
+<li><a href="https://answers.yahoo.com/question/index?qid=20071106013613AACVAGt" target="_blank" rel="noopener">RSS</a></li>
+<li><a href="https://segmentfault.com/a/1190000002632530" target="_blank" rel="noopener">Enable RSS</a></li>
+</ul>
+<h2 id="Enable-MathJax"><a href="#Enable-MathJax" class="headerlink" title="Enable MathJax"></a>Enable <a href="https://en.wikipedia.org/wiki/MathJax" target="_blank" rel="noopener">MathJax</a></h2><p>Reliable instructions can be found in <code>/theme/next/docs/MATH.md</code><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm i hexo-renderer-kramed --save # or npm i hexo-renderer-pandoc --save</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>Then you just need to turn on enable of math and choose a render engine for it (located in <code>next/_config.yml</code>):</p>
+<figure class="highlight yml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Default(true) will load mathjax/katex script on demand</span></span><br><span class="line">  <span class="comment"># That is it only render those page who has 'mathjax: true' in Front Matter.</span></span><br><span class="line">  <span class="comment"># If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.</span></span><br><span class="line"><span class="attr">  engine:</span> <span class="string">mathjax</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Then it still doesn’t work, It cost me hours to figure out the reason. The solution is already there actually. If I were smarter, then I would found the problem earlier. It teach me a lesson. If something were supposed to work easily but you get stuck. Then you need to be careful to exclude what might unlikely happen, such as the routine  introduced the error even you had repeated it again and again, moreover, you could find out the possible reason that cause the  bad situation in a short time.</p>
+<p><strong>Displayed formula example</strong></p>
+<script type="math/tex; mode=display">
+B_\nu(\lambda,T)=\frac{2hc^2}{\lambda^5}\frac{1}{e^{\frac{hc}{\lambda k_B T}}-1}</script><p><strong>Inline formula example</strong></p>
+<p>Covariant form of Dirac Equation    $ i \hbar \gamma^\mu \partial_\mu \psi - m c \psi = 0$</p>
+<h2 id="Enable-comments"><a href="#Enable-comments" class="headerlink" title="Enable comments"></a>Enable comments</h2><p>In Hexo, they already setup everything for you, so you don’t need to add some configuration to some specific files. When you want to install <code>disqus</code> on your website, what all you need to do is to provide your <code>disqus</code> shortname which is determined when you create a new site on<code>disqus</code>.</p>
+<h2 id="Encrypt-post"><a href="#Encrypt-post" class="headerlink" title="Encrypt post"></a>Encrypt post</h2><p>Using <a href="https://github.com/MikeCoder/hexo-blog-encrypt" target="_blank" rel="noopener">hexo-blog-encrypt</a> to keep some content private.</p>
+<ul>
+<li><p>No response after entering right password</p>
+<p>When it works successfully at first time, I thought there will be no mistakes anymore, yet the reality makes me headache. I didn’t modify the setup about <code>hexo-blog-encrypt</code>, however, I can’t open any encrypted post as there is no response after me entering the right password.</p>
+<p>The design scheme is not good enough, functions should be decoupled, yet all the plugin depends on many JavaScript library, so they were entangled with each other. My websites went wrong after I add a plugin which is developed long time ago.</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-footnotes --save</span><br><span class="line">npm audit fix</span><br><span class="line">npm audit</span><br></pre></td></tr></tbody></table></figure>
+<p>Then there came some confliction with dependencies thereafter.</p>
+<p>Try to this problem in following way:</p>
+<ul>
+<li><p>Reinstall an app’s dependencies using npm.</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf node_modules</span><br><span class="line">$ npm install</span><br></pre></td></tr></tbody></table></figure>
+<p>It’s brutal, yet starting over makes my mood refreshing.</p>
+</li>
+<li><p>Roll back to safe version</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard xxxxxxx</span><br></pre></td></tr></tbody></table></figure>
+<p>The devastating news is it works fine locally, the problem is still there with online website.</p>
+</li>
+</ul>
+<p>From console I can see<sup><a href="#fn_1" id="reffn_1">1</a></sup> <code>Uncaught ReferenceError: $ is not defined at blog-encrypt.js:116</code>.</p>
+</li>
+<li><p><a href="https://yuyuforest.com/2018/10/18/encrypt-toc/" target="_blank" rel="noopener">Recover TOC</a></p>
+</li>
+</ul>
+<h2 id="Footnote"><a href="#Footnote" class="headerlink" title="Footnote"></a>Footnote</h2><p>Footnotes allow you to add notes and references without cluttering the body of the document.</p>
+<h2 id="Support-markdown-emoji"><a href="#Support-markdown-emoji" class="headerlink" title="Support markdown emoji"></a>Support markdown emoji</h2><ul>
+<li><code>npm install hexo-filter-github-emojis --save</code></li>
+</ul>
+<h2 id="npm-package"><a href="#npm-package" class="headerlink" title="npm package"></a>npm package</h2><p><a href="https://docs.npmjs.com/creating-a-package-json-file" target="_blank" rel="noopener">What is <code>package.json</code> for?</a></p>
+<ul>
+<li>lists the packages your project depends on</li>
+<li>specifies versions of a package that your project can use using semantic versioning rules</li>
+<li>makes your build reproducible, and therefore easier to share with other developers</li>
+</ul>
+<blockquote id="fn_1">
+<sup>1</sup>. It’s obvious what people see in a problem varies from their capability.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> ↩</a>
+</blockquote>
+<p><span style="font-family: New York Times; font-size:1.5em; color: red"><br>Contents remains to be continued …
+</span></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/static-site-generator/" rel="tag"># static site generator</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/06/a-milestone-in-my-life/" rel="next" title="A milestone in my life">
+                <i class="fa fa-chevron-left"></i> A milestone in my life
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/27/life/" rel="prev" title="Life">
+                Life <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Popular-frameworks-for-building-website"><span class="nav-number">1.</span> <span class="nav-text">Popular frameworks for building website</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Figure-out-the-mechanism-behind-running-hexo"><span class="nav-number">2.</span> <span class="nav-text">Figure out the mechanism behind running hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Customize-your-theme"><span class="nav-number">3.</span> <span class="nav-text">Customize your theme</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Upgrade-theme-next"><span class="nav-number">3.1.</span> <span class="nav-text">Upgrade theme-next</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-RSS-Benefits-and-Reasons-for-using-RSS"><span class="nav-number">3.2.</span> <span class="nav-text">Why RSS? Benefits and Reasons for using RSS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enable-MathJax"><span class="nav-number">4.</span> <span class="nav-text">Enable MathJax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enable-comments"><span class="nav-number">5.</span> <span class="nav-text">Enable comments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Encrypt-post"><span class="nav-number">6.</span> <span class="nav-text">Encrypt post</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Footnote"><span class="nav-number">7.</span> <span class="nav-text">Footnote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Support-markdown-emoji"><span class="nav-number">8.</span> <span class="nav-text">Support markdown emoji</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm-package"><span class="nav-number">9.</span> <span class="nav-text">npm package</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/01/19/hexo/';
+        this.page.identifier = '2018/01/19/hexo/';
+        this.page.title = 'Hands-on practice with hexo';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

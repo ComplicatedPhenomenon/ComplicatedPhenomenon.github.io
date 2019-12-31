@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="A data science platform is a software hub among which all data science work takes place. Clearly, Anaconda is similar with MICROSOFT R, Wolfram Mathematica ROOT among others.">
+<meta name="keywords" content="environment management">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anaconda">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/02/11/Anaconda/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="A data science platform is a software hub among which all data science work takes place. Clearly, Anaconda is similar with MICROSOFT R, Wolfram Mathematica ROOT among others.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-27T13:27:16.847Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Anaconda">
+<meta name="twitter:description" content="A data science platform is a software hub among which all data science work takes place. Clearly, Anaconda is similar with MICROSOFT R, Wolfram Mathematica ROOT among others.">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/02/11/Anaconda/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Anaconda | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/02/11/Anaconda/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Anaconda
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-02-11 20:07:10" itemprop="dateCreated datePublished" datetime="2018-02-11T20:07:10+08:00">2018-02-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-27 21:27:16" itemprop="dateModified" datetime="2019-11-27T21:27:16+08:00">2019-11-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Anaconda/" itemprop="url" rel="index"><span itemprop="name">Anaconda</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/11/Anaconda/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/11/Anaconda/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">A data science platform is a software hub among which all data science work takes place. Clearly, Anaconda is similar with MICROSOFT R, Wolfram Mathematica ROOT among others.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Why-do-we-need-isolated-environment-for-each-project"><a href="#Why-do-we-need-isolated-environment-for-each-project" class="headerlink" title="Why do we need isolated environment for each project?"></a>Why do we need isolated environment for each project?</h1><p>Say you have multiple projects and they all rely on single package, take Django project as an example, assume each of the projects is using a specific version of Django, how do you install multiple version of a package in the OS?</p>
+<p>Obviously, it would be great if each of these projects had an isolated environment where they had only the dependencies and the specific packages they need and the version they need.</p>
+<p>Concept of types of environments:</p>
+<ul>
+<li>Global environment</li>
+<li>Virtual environment</li>
+<li>Conda environment</li>
+</ul>
+<a id="more"></a>
+<h1 id="Anaconda-distribution"><a href="#Anaconda-distribution" class="headerlink" title="Anaconda distribution"></a>Anaconda distribution</h1><p>Anaconda is a package manager, an environment manager, a Python distribution, and a collection of over 1,000+ open source packages. It is free and easy to install, and it offers free community support.</p>
+<p>Packages installed into a global environment are available to all projects that use that environment, conflicts may occur when two projects require incompatible packages or different versions of the same package.</p>
+<p><a href="https://stackoverflow.com/q/9410800/7583919" target="_blank" rel="noopener">Do I need virtualenv?</a></p>
+<h1 id="conda"><a href="#conda" class="headerlink" title="conda"></a>conda</h1><p>conda as the main part of Anaconda, served both as environment manager and package manager.</p>
+<h2 id="conda-versus-virtualenv"><a href="#conda-versus-virtualenv" class="headerlink" title="conda versus virtualenv"></a>conda versus virtualenv</h2><p><a href="https://docs.microsoft.com/en-us/visualstudio/python/managing-python-environments-in-visual-studio" target="_blank" rel="noopener">Managing Python Environments</a></p>
+<h2 id="conda-versus-pip"><a href="#conda-versus-pip" class="headerlink" title="conda versus pip"></a>conda versus pip</h2><h3 id="virtualenv"><a href="#virtualenv" class="headerlink" title="virtualenv"></a>virtualenv</h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ virtualenv MGRunningEnv</span><br><span class="line">Running virtualenv with interpreter /usr/bin/python2</span><br><span class="line">New python executable <span class="keyword">in</span> /home/wm/MGRunningEnv/bin/python2</span><br><span class="line">Also creating executable <span class="keyword">in</span> /home/wm/MGRunningEnv/bin/python</span><br><span class="line">Installing setuptools, pkg_resources, pip, wheel...done.</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="conda-quick-start"><a href="#conda-quick-start" class="headerlink" title="conda quick start"></a>conda quick start</h2><p><a href="https://conda.io/docs/_downloads/conda-cheatsheet.pdf" target="_blank" rel="noopener">conda cheat sheet : A quick start</a></p>
+<ul>
+<li><p>Build an environment.</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> activate WebFramework</span><br><span class="line">(WebFramework) $ <span class="built_in">source</span> deactivate</span><br><span class="line">$ conda create --name RStudioEnv  <span class="comment"># Build a separate environment for Rstudio</span></span><br><span class="line">$ conda install -n RStudioEnv rstudio</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>Export the environment.</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ conda env <span class="built_in">export</span> --name py2.7Env -f prerequsite.txt</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>Import an environment.</p>
+</li>
+<li>…</li>
+</ul>
+<h1 id="System-applied-python-and-Anaconda-supplied-python"><a href="#System-applied-python-and-Anaconda-supplied-python" class="headerlink" title="System-applied python and Anaconda-supplied python"></a>System-applied python and Anaconda-supplied python</h1><p>When you call <code>python</code>, which python interpreter will present depends environment variable `$PATH.</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/bin/python3</span><br><span class="line">Python 3.6.5 (default, Apr  1 2018, 05:46:30)</span><br><span class="line">[GCC 7.3.0] on linux</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">>>> <span class="built_in">exit</span>()</span><br><span class="line">$ python3</span><br><span class="line">Python 3.6.5 |Anaconda custom (64-bit)| (default, Apr 29 2018, 16:14:56)</span><br><span class="line">[GCC 7.2.0] on linux</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">>>><span class="built_in">exit</span>()</span><br><span class="line">$ /usr/bin/pip2 list --format=legacy</span><br><span class="line">asn1crypto (0.24.0)</span><br><span class="line">...</span><br><span class="line">mpmath (1.0.0)</span><br><span class="line">numpy (1.13.3)</span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure>
+<p><a href="https://stackoverflow.com/a/39022003/7583919" target="_blank" rel="noopener">https://stackoverflow.com/a/39022003/7583919</a></p>
+<h1 id="The-data-science-path"><a href="#The-data-science-path" class="headerlink" title="The data science path"></a><a href="https://www.anaconda.com/training/" target="_blank" rel="noopener">The data science path</a></h1><ul>
+<li><p>The anaconda ecosystem</p>
+<ul>
+<li><p>The Anaconda Ecosystem</p>
+</li>
+<li><p>Anaconda Packaging</p>
+</li>
+<li><p>Python Data Science Toolbox (Part 1)</p>
+<p>This course covers how to write your own functions in Python to solve problems that are dictated by your data. You’ll come out of this course being able to write your very own custom functions, complete with multiple parameters and multiple return values, along with default arguments and variable-length arguments.</p>
+</li>
+<li>Python Data Science Toolbox (Part 2)</li>
+</ul>
+</li>
+<li><p>Data import and export</p>
+<ul>
+<li><p>Importing Data in Python (Part 1)</p>
+<p>This course demonstrates the many ways to import data into Python: from flat files such as .txts and .csvs; from files native to other software such as Excel spreadsheets, Stata, SAS, and MATLAB files; and from relational databases such as SQLite & PostgreSQL.</p>
+</li>
+<li><p>Importing Data in Python (Part 2)</p>
+<p>This course extends the knowledge gained in Part 1 by showing you how to import data from the web and how to pull data from Application Programming Interfaces (APIs).</p>
+</li>
+<li><p>Introduction to Databases in Python</p>
+<p>In this course, you’ll learn the basics of using Structured Query Language (SQL) with Python.</p>
+</li>
+</ul>
+</li>
+<li><p>Data manipulations & analysis</p>
+<ul>
+<li><p>pandas Foundations</p>
+<p>This course will teach you how to use the industry-standard pandas library to import, build, and manipulate DataFrames.</p>
+</li>
+<li><p>Manipulating DataFrames with pandas</p>
+<p>This course will show you how to leverage pandas’ extremely powerful data manipulation engine to get the most out of your data. You will learn how to tidy, rearrange, and restructure your data by pivoting or melting and stacking or unstacking DataFrames.</p>
+</li>
+<li><p>Merging DataFrames with pandas</p>
+<p>This course will teach you the act of combining, or merging, DataFrames, an essential part of any working Data Scientist’s toolbox. You’ll hone your pandas skills by learning how to organize, reshape, and aggregate multiple data sets to answer your specific questions.</p>
+</li>
+<li><p>Cleaning Data in Python</p>
+<p>This course will equip you with all the skills you need to clean your data in Python, from learning how to diagnose your data for problems to dealing with missing values and outliers.</p>
+</li>
+</ul>
+</li>
+<li><p>Data visualization</p>
+<ul>
+<li><p>Introduction to Data Visualization with Python</p>
+<p>This course extends Intermediate Python for Data Science to provide a stronger foundation in data visualization in Python. Topics covered include customizing graphics, plotting two-dimensional arrays, statistical graphics, and working with time series and image data.</p>
+</li>
+<li><p>Interactive Data Visualization with Bokeh</p>
+<p>In this course, you will learn the fundamentals of Bokeh, an interactive data visualization library for Python (and other languages!) that targets modern web browsers for presentation. You will create versatile, data-driven graphics, and connect the full power of the entire Python data science stack to rich, interactive visualizations.</p>
+</li>
+</ul>
+</li>
+<li><p>Statistical analysis</p>
+<ul>
+<li><p>Statistical Thinking in Python (Part 1)</p>
+<p>Drawing conclusions from your data hinges on the principles of statistical inference. In this course, you will start building the foundation you need to think statistically and speak the language of your data.</p>
+</li>
+<li><p>Statistical Thinking in Python (Part 2)</p>
+<p>In Part II, you will dive into data sets, expanding and honing your hacker stats toolbox to perform the two key tasks in statistical inference, parameter estimation and hypothesis testing.</p>
+</li>
+</ul>
+</li>
+<li><p>Machine learning</p>
+<ul>
+<li><p>Supervised Learning with scikit-learn</p>
+<p>In this course, you’ll learn how to use scikit-learn one of the most popular and user-friendly machine learning libraries for Python—to perform supervised learning, an essential component of machine learning. Using real-world datasets, you will learn how to build predictive models, how to tune their parameters, and how to tell how well they will perform on unseen data.</p>
+</li>
+<li><p>Unsupervised Learning in Python</p>
+<p>This course covers the fundamentals of unsupervised learning using scikit-learn and SciPy. You will learn how to cluster, transform, visualize, and extract insights from unlabeled datasets.</p>
+</li>
+<li><p>Machine Learning with the Experts: School Budgets</p>
+<p>This course focuses on a case study related to school district budgeting, based on a machine learning competition on DrivenData.</p>
+</li>
+</ul>
+</li>
+<li><p>Data at scale</p>
+<ul>
+<li>PySpark</li>
+<li>Parallel Computing with Dask</li>
+</ul>
+</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/environment-management/" rel="tag"># environment management</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/11/Manim/" rel="next" title="Manim">
+                <i class="fa fa-chevron-left"></i> Manim
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/26/MarkdownExtensions/" rel="prev" title="Markdown and It's Extensions">
+                Markdown and It's Extensions <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-do-we-need-isolated-environment-for-each-project"><span class="nav-number">1.</span> <span class="nav-text">Why do we need isolated environment for each project?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anaconda-distribution"><span class="nav-number">2.</span> <span class="nav-text">Anaconda distribution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conda"><span class="nav-number">3.</span> <span class="nav-text">conda</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#conda-versus-virtualenv"><span class="nav-number">3.1.</span> <span class="nav-text">conda versus virtualenv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conda-versus-pip"><span class="nav-number">3.2.</span> <span class="nav-text">conda versus pip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#virtualenv"><span class="nav-number">3.2.1.</span> <span class="nav-text">virtualenv</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conda-quick-start"><span class="nav-number">3.3.</span> <span class="nav-text">conda quick start</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-applied-python-and-Anaconda-supplied-python"><span class="nav-number">4.</span> <span class="nav-text">System-applied python and Anaconda-supplied python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-data-science-path"><span class="nav-number">5.</span> <span class="nav-text">The data science path</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/02/11/Anaconda/';
+        this.page.identifier = '2018/02/11/Anaconda/';
+        this.page.title = 'Anaconda';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

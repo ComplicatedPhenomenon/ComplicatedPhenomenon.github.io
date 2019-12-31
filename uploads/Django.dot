@@ -1,0 +1,31 @@
+digraph Django {
+label = "A clue to help me recall how to start building web application using Django";
+node [shape = record];
+
+A [label = "Django project:\n FreeAir"];
+
+A1 [label = "Developing\n environment"];
+a1b [label = "Python|Django| Django\n package"];
+
+A2 [label = "Database\n servers", style=filled, fillcolor=red];
+a2b [label = "PostgreSQL| MySQL| Oracle| SQLite| ..."];
+
+FS [label = "Main file\n to modify"];
+
+A3 [label = "FreeAir"];
+a3b [label = "<f0> settings.py | <f1> urls.py", color = "yellow"];
+
+
+A4 [label = "App:\n article"];
+a4b [label = "<f0> admin.py|<f1> models.py |<f2> urls.py |views.py", color = "mediumspringgreen"];
+
+
+rankdir=LR;
+A->{A1; A2; FS}[color = "cyan2"]
+A1->{a1b};
+FS->{A4;A3}[color = "red"]
+A2->{a2b};
+A3->{a3b};
+A4->{a4b};
+
+}

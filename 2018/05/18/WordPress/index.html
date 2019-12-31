@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="On ubuntu17.*, Here below show some experiences in building a website using WordPress.">
+<meta name="keywords" content="web development">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to build the environment for WordPress?">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/05/18/WordPress/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="On ubuntu17.*, Here below show some experiences in building a website using WordPress.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tse3.mm.bing.net/th?id=OIP.hmtxlliesEFAVJ9XkkfbpgHaDQ&pid=Api">
+<meta property="og:image" content="https://media.giphy.com/media/yCACLb0AMDRi8/giphy.gif">
+<meta property="og:updated_time" content="2019-11-12T14:02:52.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to build the environment for WordPress?">
+<meta name="twitter:description" content="On ubuntu17.*, Here below show some experiences in building a website using WordPress.">
+<meta name="twitter:image" content="https://tse3.mm.bing.net/th?id=OIP.hmtxlliesEFAVJ9XkkfbpgHaDQ&pid=Api">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/05/18/WordPress/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>How to build the environment for WordPress? | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/05/18/WordPress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">How to build the environment for WordPress?
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-18 22:46:39" itemprop="dateCreated datePublished" datetime="2018-05-18T22:46:39+08:00">2018-05-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-12 22:02:52" itemprop="dateModified" datetime="2019-11-12T22:02:52+08:00">2019-11-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/WordPress/" itemprop="url" rel="index"><span itemprop="name">WordPress</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/18/WordPress/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/18/WordPress/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">On ubuntu17.*, Here below show some experiences in building a website using WordPress.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://tse3.mm.bing.net/th?id=OIP.hmtxlliesEFAVJ9XkkfbpgHaDQ&pid=Api" alt><br><a id="more"></a></p>
+<p>WordPress is open source software you can use to create a beautiful website, blog, or app. (Having said that, it is tricky to find a free and reliable host.)</p>
+<p>Nevertheless, if you want to take a try with it, You need to have a few things in place, LAMP for short.</p>
+<h2 id="Asking-your-question-in-a-proper-way"><a href="#Asking-your-question-in-a-proper-way" class="headerlink" title="Asking your question in a proper way"></a>Asking your question in a proper way</h2><p>Since when you first touch with new things, there must exists many problems which you have no clue how to address. Then you must learn some rule by your heart</p>
+<ul>
+<li><a href="https://mattgemmell.com/what-have-you-tried/" target="_blank" rel="noopener">What have you tried? </a></li>
+<li><a href="https://meta.stackexchange.com/q/147616" target="_blank" rel="noopener">What Do You Mean “It Doesn’t Work”? [closed]</a></li>
+</ul>
+<p>Why?</p>
+<ul>
+<li>Show you are not an idiot.</li>
+<li>Show your respect for whom gonna help you.</li>
+</ul>
+<h2 id="Install-LAMP-and-phpMyAdmin"><a href="#Install-LAMP-and-phpMyAdmin" class="headerlink" title="Install LAMP and phpMyAdmin"></a>Install LAMP and phpMyAdmin</h2><h3 id="Introduction-of-ALMP"><a href="#Introduction-of-ALMP" class="headerlink" title="Introduction of ALMP"></a>Introduction of ALMP</h3><p>Apache is the actual web server software, MySQL is the Structured Query Language for the backend database software, and PHP is the hypertext preprocessor for hosting dynamic web pages using the server-side HTML embedded scripting language.  </p>
+<p>MySQL is a database management system that is used by WordPress to store and retrieve all your blog information. Think of it this way. If your database is a filing cabinet that WordPress uses to organize and store all the important data from your website (posts, pages, images, etc), then MySQL is the company that created this special type of filing cabinet. <a href="http://www.wpbeginner.com/glossary/mysql/" target="_blank" rel="noopener">…</a></p>
+<p><strong>WordPress uses the PHP programming language to store and retrieve data from the MySQL database.</strong> To retrieve data from the database, WordPress runs SQL queries to dynamically generate content.</p>
+<p>For users that are not comfortable writing their own PHP and SQL scripts, most web hosting providers offer easy to use web applications to manage databases. One such web application is phpMyAdmin which allows users to manage their database using a web based graphical interface.</p>
+<h3 id="Tutorial-to-install-LAMP-amp-phpMyAdmin"><a href="#Tutorial-to-install-LAMP-amp-phpMyAdmin" class="headerlink" title="Tutorial to install LAMP & phpMyAdmin"></a>Tutorial to install LAMP & phpMyAdmin</h3><p>Even if you already have all the components installed and <strong>integrated with one another</strong>, they should work with<br>the examples in this book.</p>
+<ul>
+<li><a href="https://www.vultr.com/docs/how-to-install-apache-mysql-and-php-on-ubuntu-17-04" target="_blank" rel="noopener">How to Install Apache, MySQL and PHP on Ubuntu 17.04</a></li>
+<li><a href="https://websiteforstudents.com/installing-phpmyadmin-apache2-mysql-php-ubuntu-17-04-17-10/" target="_blank" rel="noopener">Installing phpmyadmin apache2 mysql php ubuntu 17.04 17.10</a><br><a href="https://stackoverflow.com/q/4991410/7583919" target="_blank" rel="noopener">How to assign hostname to the web server?</a></li>
+</ul>
+<h3 id="Some-Problems-you-might-met"><a href="#Some-Problems-you-might-met" class="headerlink" title="Some Problems you might met"></a>Some Problems you might met</h3><h4 id="About-phpMyAdmin"><a href="#About-phpMyAdmin" class="headerlink" title="About phpMyAdmin"></a>About phpMyAdmin</h4><ul>
+<li><p><code>http://127.0.0.1/phpmyadmin</code> not found.</p>
+<p><a href="https://askubuntu.com/q/387062" target="_blank" rel="noopener">How to solve the phpmyadmin not found issue after upgrading php and apache?</a></p>
+</li>
+<li><p><a href="https://askubuntu.com/a/175204" target="_blank" rel="noopener">Access phpMyAdmin after installation</a>.</p>
+</li>
+<li><p>Default root folder of the web server <a href="https://stackoverflow.com/a/16197738/7583919" target="_blank" rel="noopener">/var/www/html</a></p>
+  <figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ln -s /usr/share/phpmyadmin /var/www/html</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>Can't access phpMyAdmin because of host, username and password</code></p>
+<p>When I tried to login phpMyAdmin with username and password.(Retrieved while executing <code>sudo dpkg-reconfigure phpmyadmin</code> which I think is a MySQL username for phpmyadmin to register with the database server. )</p>
+<ul>
+<li><a href="https://serverfault.com/q/259502" target="_blank" rel="noopener">Solution</a>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Confusions-with-mysql"><a href="#Confusions-with-mysql" class="headerlink" title="Confusions with mysql"></a>Confusions with mysql</h4><p>Making symbolic links for mysql related command like below is labrious,<br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ln -s /Applications/MAMP/Library/bin/mysql /usr/<span class="built_in">local</span>/bin/mysql</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>instead you can configure <code>PATH</code> in your <code>.bashrc</code>. Then login mysql with <code>$ mysql -u root -p</code></p>
+<ul>
+<li><a href="https://stackoverflow.com/a/22132817" target="_blank" rel="noopener">Difference between <code>mysql</code>, <code>mysqld</code> and <code>mysqladmin</code></a>.</li>
+</ul>
+<h2 id="How-to-start-learning-MySQL"><a href="#How-to-start-learning-MySQL" class="headerlink" title="How to start learning MySQL?"></a>How to start learning MySQL?</h2><p>Play with a database</p>
+<ol>
+<li>Create database <code>sampledatabase</code></li>
+<li><p>Load database into MySQL Database Server</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql> use classicmodels;</span><br><span class="line">mysql> source mysqlsampledatabase.sql</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>Reference</p>
+<ul>
+<li><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/</a></li>
+</ul>
+<h2 id="Welcome-to-WP"><a href="#Welcome-to-WP" class="headerlink" title="Welcome to WP"></a>Welcome to WP</h2><h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><ul>
+<li>Create a database for WordPress</li>
+<li><p>Let the WordPress know:</p>
+<ul>
+<li>The name of the database you want to use with WordPress.</li>
+<li>Your database username.</li>
+<li>Your database password.</li>
+<li>…</li>
+</ul>
+<p>All right, sparky! You’ve made it through this part of the installation. WordPress can now communicate with your database. If you are ready, time now to…</p>
+</li>
+</ul>
+<h3 id="Customization"><a href="#Customization" class="headerlink" title="Customization"></a>Customization</h3><ul>
+<li>Choose a Theme</li>
+<li>Add Plugin<ul>
+<li><code>Elementor</code></li>
+<li><a href="git@github.com:proteusthemes/one-click-demo-import.git">One click demo import</a>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Host-WordPress"><a href="#Host-WordPress" class="headerlink" title="Host WordPress"></a>Host WordPress</h2><h3 id="Move-WordPress-from-localhost-to-a-live-server"><a href="#Move-WordPress-from-localhost-to-a-live-server" class="headerlink" title="Move WordPress from localhost to a live server"></a>Move WordPress from localhost to a live server</h3><p>Developing a website locally speeds up the developing process. Once you have  finished your website on your own computer, the next step is to move the site live and share your creation with the world.<a href="http://www.wpbeginner.com/wp-tutorials/how-to-move-wordpress-from-local-server-to-live-site/" target="_blank" rel="noopener">An experience</a>.</p>
+<h3 id="Transfer-a-live-WordPress-website-to-your-localhost-manually"><a href="#Transfer-a-live-WordPress-website-to-your-localhost-manually" class="headerlink" title="Transfer a live WordPress website to your localhost manually"></a>Transfer a live WordPress website to your localhost manually</h3><p>Web host to local host. ( As a backup for your website.)</p>
+<p><img src="https://media.giphy.com/media/yCACLb0AMDRi8/giphy.gif" alt></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web-development/" rel="tag"># web development</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/18/MadGraph5_aMC/" rel="next" title="MadGraph5_aMC@NLO">
+                <i class="fa fa-chevron-left"></i> MadGraph5_aMC@NLO
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/15/root/" rel="prev" title="ROOT">
+                ROOT <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Asking-your-question-in-a-proper-way"><span class="nav-number">1.</span> <span class="nav-text">Asking your question in a proper way</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-LAMP-and-phpMyAdmin"><span class="nav-number">2.</span> <span class="nav-text">Install LAMP and phpMyAdmin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction-of-ALMP"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction of ALMP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tutorial-to-install-LAMP-amp-phpMyAdmin"><span class="nav-number">2.2.</span> <span class="nav-text">Tutorial to install LAMP &amp; phpMyAdmin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Some-Problems-you-might-met"><span class="nav-number">2.3.</span> <span class="nav-text">Some Problems you might met</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#About-phpMyAdmin"><span class="nav-number">2.3.1.</span> <span class="nav-text">About phpMyAdmin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Confusions-with-mysql"><span class="nav-number">2.3.2.</span> <span class="nav-text">Confusions with mysql</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-start-learning-MySQL"><span class="nav-number">3.</span> <span class="nav-text">How to start learning MySQL?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Welcome-to-WP"><span class="nav-number">4.</span> <span class="nav-text">Welcome to WP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup"><span class="nav-number">4.1.</span> <span class="nav-text">Setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Customization"><span class="nav-number">4.2.</span> <span class="nav-text">Customization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Host-WordPress"><span class="nav-number">5.</span> <span class="nav-text">Host WordPress</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Move-WordPress-from-localhost-to-a-live-server"><span class="nav-number">5.1.</span> <span class="nav-text">Move WordPress from localhost to a live server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transfer-a-live-WordPress-website-to-your-localhost-manually"><span class="nav-number">5.2.</span> <span class="nav-text">Transfer a live WordPress website to your localhost manually</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/05/18/WordPress/';
+        this.page.identifier = '2018/05/18/WordPress/';
+        this.page.title = 'How to build the environment for WordPress?';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

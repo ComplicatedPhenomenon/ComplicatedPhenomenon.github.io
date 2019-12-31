@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="An astrophysical simulation framework for propagating extraterrestrial ultra-high energy particles.">
+<meta name="keywords" content="Astrophysics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CRPropa">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/09/07/CRPROPA/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="An astrophysical simulation framework for propagating extraterrestrial ultra-high energy particles.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-07T05:35:44.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CRPropa">
+<meta name="twitter:description" content="An astrophysical simulation framework for propagating extraterrestrial ultra-high energy particles.">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/09/07/CRPROPA/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CRPropa | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/09/07/CRPROPA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CRPropa
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-07 19:57:06" itemprop="dateCreated datePublished" datetime="2018-09-07T19:57:06+08:00">2018-09-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-07 13:35:44" itemprop="dateModified" datetime="2019-12-07T13:35:44+08:00">2019-12-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Code-in-Physics/" itemprop="url" rel="index"><span itemprop="name">Code in Physics</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/07/CRPROPA/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/07/CRPROPA/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">An astrophysical simulation framework for propagating extraterrestrial ultra-high energy particles.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder>
+    <label for="hbePass">Hey, password is required here.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="c1f3b3e4f08331fba5e56db65ac17f7d4e475bc5766aea859d364c156f595875">92d05ceaceb2ffb07887af8ac2ebb6fd68077fa33829903e57db2b49198ee656dc8d03f8cbbd80c161c8bfe9e6a94b38b36877700f58465a3a1605d27652fc2ef4fa5a2e896381c92ad223fb63ca990180bdc2dbaafb6b54df5a9c774b27be9a8196eb443622d744ae0adee50efa206470cd3697a7d0137b6e9247fc7f97900047bb919230306be58b7a00f3a42414ace5d29a6a9b068e58b1f1af2d789affbd92469dda69e3a8b4e5bc1968fd73490f397b9cd71828589832d366213761549a1616c48a9e1e3b2472f8406073e909c3b0ce284f1fa46843b21734d7fe7a042a35a0137254a4acfadfaa5ae50ce3595b0023269f1715933f2756c2952b45dcd64dc6e05f9963717a6d5c4ea9954cd23bc16e96bff74deabab9b71cfb1346d8acdcfaa59efea3d72e2abd650f7501cab3754d7dd246868baac88815cd95c24a769074df02d6d7e2d7eaed7780fff233c0adb6f89110efe31a77d5384b6b0050879a8cb08ff6453dc04316bcccf2fbfd99407e40076228e8232290a7c6fde7750da512e6d25e6c4ed730eb31f7625416905e77fdb662f041170520316fe8362dcc15a97627e6d3d528c92e43b690e13e55d3f903a917ac75846d51087e4d0d7cf7ddd593b0c135850ff1b3113e489cab2f2c82f6cab27faea228fa6a9fd5a5ed2ad42af27a5b67c3385864bf354113ece016682bb92930efad989ce3d129a708fa5dc6eb3aa66ccc03c098b195b07b4514be767e49afbdba72c8dec2055eba50b6f0cfbb36d0733cbc4ff175ef0da1e46c3ae2e595a769162f2a6bfa30c39c314cc9f142bebeaf2ecfe811be61de0d0944030d6aa358c511c3e2a664857b02e123ea0e23c76ea4fd82d3d4e698f1141a6b277f593771cc6dd58eeea41d9326cfaa2cf9a4b1e68e148de918023de8010d33c781267b87647107d309cb4aca779ed102219edfaab739bd351df3184d1a899ba3c3404555c10d60f2d3bcb41f735b577d93a2513b0bcb641cc438214a39e94cb5b43ca2fc21303a569b13b96f5adf6e0dd6b65f1fccdf4cfe65d35df92c42ba52bd9f12999464d95ffa2de22bf1aa0cd6b5526dd2383d14f0672696dc58ba2e3eb5d5ffab6535b382b7eb7c31ae499eb22c42c5173a65bb17c44d60c869bf4edfdc9685bfc254c85cf4897068f39dd0660bc40283482822ff0a0b6e23fcc5f8e78cdd6866a6fe143fa7663f42d8249961a2c44fd0c36c5adb608eccad2e18c24cc5c1849eb1b8d51ae6ea73a46dad0ce29937bca39d0e1a3dc90b9b7eac125c36a0cfc37e22ad14d481d1b525ddecf0753cfb8f2791fb158e73ac0899d1b583b18cbd94b64fbd151b79cc499ac903e7b34ed9eccb3ac3d1dbbd5ba8d09fcceea35f9204555012ad3b8a99e42ef7211407b6df5c391ce86ec384f40e4a3c8339dd12232e1e8c8d21597ca8b98f142735da86fd85021cf79833c308d1326e89a9d4faf059f477918d53a4e1989e6c63875688f91164412a3895379d9e320de5ade91a9564f6ff3bee9bd73ee57af216cad24bbbf7d8be175e8f7b55b17b1a8d57b6503859ff141d7a8bb0b6061976f3c90c0023338a5b7a56a50b0599c441ed0350fc21d8a02b8aca9b5febe808777503f8a917c19dfd0fd626fdd0a9bf8df2a9176fa53f735c1d9e11b120c1611d150f3d6229022d1e3cc29a2f2fe9e25e8a343a96a7c95603fd12af942e001680d5ce05215427deec182a18e59e2c2491af9bb901945cc8918a218789083cc7dc8ddb045ee30facbb0e85ff2f750a1eb2fc4bf89ef259e1d967561176cd425e187f2adae5013db5bce6b444b17d353d874853a42066a26ffd259192b7e2537e3996009c213daef7bd547568da823df23626e815bf8da9b5689ceeacfafe1dfbbdb1a4b25201f3b885f43ab2eb641d9d4231bf31ae1c10a1e84700b6e58a6ad945297c9a19299165bc37cd1f2cf66611515c8b5849a6813532777b818ab35c3b5bc1131f3a937d7f63130cfafd5c7b0eeeba7734d4a35170c8a10c0f307ec138956f6a5429b3207ce301fbbc3b568f7f25d4b2537a0b8e8fa19dc65ac1d7c46c969e754637a565b8c58167ec05f5307fed533e32026d820d84eca82e4ff6e9cbec8e67207f5c20f91b99a6281e3a26e0c1ff1ffd786f728bf68f79bd7ff797f876a8181f6fd85395d43ae9907463ca2dee2d5ef51c17bf74138c19983ecc4974b8bf1b5439b5f3f2b2cf9d8ad594acd90c80abe5065d8ab073a4f15e59d6fd12645ae4e36332baf304453120f2aedc873ccd20f587ce09b18521e9bbca0f7c97187519c2569cd400eaa24fcd2b726a455a289360b09ad79e2473684f2598406dc8f930aeb471101020249798f3792c2df8e6d405039cef7456179c9720f0d84ceea663f83ad7a4524231ba23866b5cd1317d21e1a7100fc6265f47c63a8840e96fd61136140e9040e68c13ee6c53b9bc4f904ea7ebee33ae495b4cfe730e23b8fd94fb00196d4eada72462fcee163b19d2ea2585c64519a8c16b6d5e34ce6d1d79a1d78052804b357700f4f79081401b027661f90545cfc9f716d153b142995125a528c5625249137f5235ac17ac979f7dfe74d431b8562536cebffd5ff7e1381e8d738922585d8257e00cf1ae52eeeda00bdd54113c51f4adea84a9a98b1841bc5ce749c07e46307a9a76fa71c8dcedbefe8a66b5f9604e59bef143d6e1ee3f78defe8000fa35589aac49e820e5007d0c05018ce9f4cae598e16084e9542b1814ffb7e9ab0e2f3491f0e6d81947eecb0f32bb737e9e6611218c4575e624efd9b1c6bb77113e567c88fc9214a43c682e1ff8d208dcc3fb271820e5d1fabd9bc1fdbe2f9d8b4480642c1aa2d99cfea67d059dcb0a00fae8a5ad29353d4840c515cf2adb21d141c22756c0eefa8cd2bc5863943f98defbb5e9e85b3c54b5814f168cb204ed051aef48b8d8ae50b96b156b11349701a1df76ccc3fc3698a64456b5812394cb3ccb6cc8484d0cc1ae1407ce89d41589ab53aa52f292b13dcbde6a39fd118c5ca320c8a2fe334e2b31493d5b1e94fbaeec4472d82d36b46b64a2e4afae3be2600e35927c95516fe20c9944758ada773f58de4852b8c61c54d30ea5c3e0866851d2063e6ad092bcb11c5f68e9302378c307d7de57da768717b146ab456417512703dc96999a86ce93820a2f3e7498d62ab6d42c758cacd0556fdcf557f96c2d72cf612a92cb50ffeb5af47423e80654946879a0833eccd1a6c8a19f36017a2b047784ec7acc706c8f958f3be69b2341d234c027afb143f586d57267b02d0998c0137ea6cc4d42f30d015641c15e74e5840c5c358af0f6d001b95eef13639df5d4209444a98fe240057968930474137ebf81a3b1a1898980b7bbb93e51bef38020eb5aec4e8c18c25c9871d85369fd32d4fd37ae5647091d71f459c3d63c3ee53c543c13626fe50f7c4aa1b0387628ab428918af483e552d4668d7fe159aee7f1b4e1073e56af7e7a017c0985691e1def6b191ac81b39e5c34bd9999c227628a43dddc627d506c7e425c3ef2896caf5093f0688c759475d1856e837f76dbb7af44ef797a6a0c35d2f1fd86be8251a3f0246506a7b89546928dd972a863901aef275e51e0b2dd1baf5e3c9726373fc923b47d633df401b4db2615e8a018ab1c9e473483acc8a78f4d76d3a82eafd580231006f7bd47474256a58ac69b0eca098112c9f3e0f7d891b982752133a6e536ac817acef4ebad4d13c3b5edfc9f6e27ca3f71cd1d91ed78adfa8a40c48e2c5d6c4b941eac3e72df1e2985dfec9716a6ea75e0292fbe34f9a1799e6022328d3397acf3be1d298f7872dc5bf637492b39e4ebe3455a9093872e04875f0edde845e57f832ac4a48571ab86d268841adc62ac776706b9b32efa5907579763e12b845e23e1110d7983305784a86cd5950215bc2178ee390b0d32d4a1b6e165fd04b42001c074aa7c73b456c96ee159b901ebfe8650ba682b393a63ddb8224fdd0a7c1f73eaa39a7a4ecc2eaf98b6595d57f51b62836e69b871e2dd4bca87479246b4f3e52e404b11a93ad89d233ec30defc8dc2b8c5dcab2c1a6e08ecaffc029fdb81c1b1fcbd68db4bb00c5a57311a56361a1823a8d6944d0d4d9c47099695ba083e5767cafbeeba48c108cc24f8a2f4dab578f776c44c5f22d5ad74593cf0efa69934b44133239f63f6cb9b708b903f189298bd5195e419469166d973115c5356a56e76dc36f45cf7c30d043b1838d798d132637069cad788d490341c32f846cc5f5f7162b0e8e2bbc5cee224eca02780c6fa2bab8754dc6d09347e0c1d41de1a73648f86d332241327f2ef5d3f3e60bef778fbb05f3fabfb07223c450f5c644c53f255be023ddd512e0b42de509dbf5a21cd3a5787a1e9b52c39839eda4d5eb6d7fa672cfa26518f4d958a6f35506dfe72c0b6ac48f0aaa87a1153fac88971a276c18a35d882f7e57dcf33c005c7594b73b7ca4d2aeba557cdc1a30ec7f17f12ed144d8ea3d7bac45a0e5f43394a33ffea114621b893394bd9ed88f503d16a4d3e56f5daaf6932c4aa07c167e002e45c5b19c1dab7bd865767c830e442493319365a704cfb6208e8be45b52d3ef3878c4fb950cce179ae470d1254676422020e8451051c662da2abf13ff71a6f18fdd24ce23564b17be023ef4f1d92cf9a1659371e107fc5befc834f7e628dd4149e5b2cb03583518cf991a4084a49805ef69b8f86601ed287e662bce4900c233bcaa598d8cf16878c1003c90771dd454818738f9718d3456dafa4626b0cf6a4a85afb8b84ac94cbad478a6fb86608b4ca3fddd158ef8e0fb609542a9aff1abbd153c8f4d77432d90112b8cc968b8d649eef551beb184c37798c851dc4272a049928bd0e1c252acaf05bb385cb81b7b9634566ae648cbb0050fc44463c6cdce31d151f199ababee097a0dad120c30f755b1ce9aed3e5b4dc578624df700e3865f1a271d1428e42cd015f69e0f1add41256ce46cc4eda44f04cae0e7f86add2f4e4e0f5937aefc88394f4164af5daa115903ed6938bc6b40a794d21bf80260bfd54ac3b9a17f7c63df009582e7ccaa91ca32f6d538cab602aad6524a73346e6d4a30f73c8c0ed3ccc69d3b5964022889a0fc3b7217</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Astrophysics/" rel="tag"># Astrophysics</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/04/spider/" rel="next" title="Crawler">
+                <i class="fa fa-chevron-left"></i> Crawler
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/28/Jekyll/" rel="prev" title="Using Jekyll to make static website">
+                Using Jekyll to make static website <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/09/07/CRPROPA/';
+        this.page.identifier = '2018/09/07/CRPROPA/';
+        this.page.title = 'CRPropa';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

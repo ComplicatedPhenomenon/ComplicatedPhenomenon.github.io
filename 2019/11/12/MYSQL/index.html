@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="MYSQL">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2019/11/12/MYSQL/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://media.giphy.com/media/7JVBkckpaehQk/giphy.gif">
+<meta property="og:image" content="https://complicatedphenomenon.gitlab.io/uploads/mysql.png">
+<meta property="og:image" content="https://complicatedphenomenon.gitlab.io/uploads/sqlframe.png">
+<meta property="og:image" content="https://complicatedphenomenon.gitlab.io/uploads/join.jpg">
+<meta property="og:image" content="https://complicatedphenomenon.gitlab.io/uploads/sqlworkflow.png">
+<meta property="og:updated_time" content="2019-12-07T05:35:44.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MYSQL">
+<meta name="twitter:image" content="https://media.giphy.com/media/7JVBkckpaehQk/giphy.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2019/11/12/MYSQL/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MYSQL | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2019/11/12/MYSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MYSQL
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-11-12 20:41:48" itemprop="dateCreated datePublished" datetime="2019-11-12T20:41:48+08:00">2019-11-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-07 13:35:44" itemprop="dateModified" datetime="2019-12-07T13:35:44+08:00">2019-12-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/DataBases/" itemprop="url" rel="index"><span itemprop="name">DataBases</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/12/MYSQL/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/12/MYSQL/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://media.giphy.com/media/7JVBkckpaehQk/giphy.gif" alt><br><a id="more"></a></p>
+<h1 id="Architecture-of-MySQL"><a href="#Architecture-of-MySQL" class="headerlink" title="Architecture of MySQL"></a>Architecture of MySQL</h1><p><img src="/uploads/mysql.png" alt><br><img src="/uploads/sqlframe.png" alt></p>
+<h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><p>Index is a data structure, mainly B-tree in mysql,</p>
+<ul>
+<li><p>Advantages of index</p>
+<ul>
+<li>Increase efficiency of search. (Decrease IO usage rate)</li>
+<li>Decrease the usage rate of cpu.</li>
+</ul>
+</li>
+<li><p>Limitation of index</p>
+<ul>
+<li>Index itself cost memory. If the database is not that big, no need to create index.</li>
+<li>It doesn’t apply to some case, when the database is very large, and the column is seldom changed can be index.</li>
+<li>Decrease the efficiency to delete, modify, update</li>
+</ul>
+</li>
+<li><p>primary key</p>
+</li>
+<li><p>foreign key</p>
+<p>A foreign key is a key used to link two tables together. This is sometimes also called as a referencing key.</p>
+</li>
+</ul>
+<p>PRIMARY KEY vs. UNIQUE KEY vs. KEY vs. FOREIGN KEY<br><a href="https://www.tutorialcup.com/dbms/b-tree.htm" target="_blank" rel="noopener">https://www.tutorialcup.com/dbms/b-tree.htm</a></p>
+<h1 id="Frequently-used-query"><a href="#Frequently-used-query" class="headerlink" title="Frequently used query"></a>Frequently used query</h1><p>How to design a relational database?</p>
+<p>Here we use an existed database <code>classicmodels</code>.<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql> USE classicmodels;</span><br><span class="line">mysql> SHOW TABLES;</span><br><span class="line">+-------------------------+</span><br><span class="line">| Tables_in_classicmodels |</span><br><span class="line">+-------------------------+</span><br><span class="line">| commitees               |</span><br><span class="line">| customers               |</span><br><span class="line">| employees               |</span><br><span class="line">| memebers                |</span><br><span class="line">| offices                 |</span><br><span class="line">| orderdetails            |</span><br><span class="line">| orders                  |</span><br><span class="line">| payments                |</span><br><span class="line">| productlines            |</span><br><span class="line">| products                |</span><br><span class="line">+-------------------------+</span><br><span class="line">10 rows in set (0.00 sec)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<ul>
+<li><p><code>SHOW COLUMNS</code></p>
+  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">FULL</span> <span class="keyword">COLUMNS</span></span><br><span class="line"><span class="keyword">FROM</span>  orders;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>DESC</code></p>
+  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DESCRIBE</span> orders;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>SELECT</code></p>
+<p>prototype: <code>SELECT select_list FROM table_name WHERE search_condition;</code></p>
+  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    productCode,</span><br><span class="line">    productName,</span><br><span class="line">    buyPrice</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    buyPrice <span class="keyword">BETWEEN</span> <span class="number">80</span> <span class="keyword">AND</span> <span class="number">90</span>;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>join</code></p>
+<p>A relational database consists of multiple related tables linking together using common columns which are known as foreign key columns.</p>
+<p>To get complete <code>orders</code>’ information, you need to query data from both orders and  <code>orderdetails</code> tables.</p>
+<p><img src="/uploads/join.jpg" style="width: 80%; height: 80%" ​></p>
+<p><a href="http://www.mysqltutorial.org/mysql-join/" target="_blank" rel="noopener">http://www.mysqltutorial.org/mysql-join/</a></p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">      m.member_id, m.name <span class="keyword">member</span>, c.committee_id, c.name committee</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">      members <span class="keyword">AS</span> m</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">      committees <span class="keyword">AS</span> c</span><br><span class="line"><span class="keyword">USING</span>(<span class="keyword">name</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">      m.member_id, m.name <span class="keyword">member</span>, c.committee_id, c.name committee</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">      members <span class="keyword">AS</span> m</span><br><span class="line"><span class="keyword">CROSS</span> <span class="keyword">JOIN</span> committees <span class="keyword">AS</span> c;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>create</code></p>
+<ul>
+<li><p>create database, table</p>
+</li>
+<li><p>save the query in the database server and assign a name to it, the named query is <code>view</code>.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> customerPayments</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    customerName,</span><br><span class="line">    checkNumber,</span><br><span class="line">    paymentDate,</span><br><span class="line">    amount</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span></span><br><span class="line">    payments <span class="keyword">USING</span> (customerNumber);</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>alter</code></p>
+  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line"><span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span>(column_list);</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> constraint_name</span><br><span class="line"><span class="keyword">UNIQUE</span> (column_list);</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>drop</code></p>
+  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> index_name <span class="keyword">ON</span> table_name;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>status</code></p>
+  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span></span><br><span class="line">    <span class="keyword">table</span> <span class="keyword">status</span></span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    <span class="keyword">name</span> = <span class="string">'orders'</span>;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h1 id="sql-optimization"><a href="#sql-optimization" class="headerlink" title="sql optimization"></a>sql optimization</h1><p>Why do we need to optimize sql?</p>
+<ul>
+<li>Bad Performance<ul>
+<li>executing time too long</li>
+<li>waiting time too long</li>
+</ul>
+</li>
+<li>query on multiple tables</li>
+<li>Index lose effectiveness</li>
+<li>Bad setup Server parameter</li>
+</ul>
+<h1 id="Principles-behind"><a href="#Principles-behind" class="headerlink" title="Principles behind"></a>Principles behind</h1><h2 id="The-workflow-of-executing-a-sql-query"><a href="#The-workflow-of-executing-a-sql-query" class="headerlink" title="The workflow of executing a sql query"></a>The workflow of executing a sql query</h2><p><img src="/uploads/sqlworkflow.png" style="width: 80%; height: 80%" ​></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a href="https://www.cnblogs.com/annsshadow/p/5037667.html" target="_blank" rel="noopener">https://www.cnblogs.com/annsshadow/p/5037667.html</a></li>
+<li><a href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html" target="_blank" rel="noopener">https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html</a></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/23/svn-git-in-action/" rel="next" title="SVN & Git in action">
+                <i class="fa fa-chevron-left"></i> SVN & Git in action
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture-of-MySQL"><span class="nav-number">1.</span> <span class="nav-text">Architecture of MySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Index"><span class="nav-number">2.</span> <span class="nav-text">Index</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Frequently-used-query"><span class="nav-number">3.</span> <span class="nav-text">Frequently used query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sql-optimization"><span class="nav-number">4.</span> <span class="nav-text">sql optimization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Principles-behind"><span class="nav-number">5.</span> <span class="nav-text">Principles behind</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-workflow-of-executing-a-sql-query"><span class="nav-number">5.1.</span> <span class="nav-text">The workflow of executing a sql query</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.2.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2019/11/12/MYSQL/';
+        this.page.identifier = '2019/11/12/MYSQL/';
+        this.page.title = 'MYSQL';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

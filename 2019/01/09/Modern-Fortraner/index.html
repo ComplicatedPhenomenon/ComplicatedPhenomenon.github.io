@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Fortran is less popular to mankind, but is very welcomed in scientific computing. Fortran is evolving with time to live up to good features in programming, so I am found of it and belive in its future">
+<meta name="keywords" content="Fortran">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern Fortraner">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2019/01/09/Modern-Fortraner/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="Fortran is less popular to mankind, but is very welcomed in scientific computing. Fortran is evolving with time to live up to good features in programming, so I am found of it and belive in its future">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://media.giphy.com/media/SfrRifQ63n5fi/giphy.gif">
+<meta property="og:updated_time" content="2019-12-25T12:13:35.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Modern Fortraner">
+<meta name="twitter:description" content="Fortran is less popular to mankind, but is very welcomed in scientific computing. Fortran is evolving with time to live up to good features in programming, so I am found of it and belive in its future">
+<meta name="twitter:image" content="https://media.giphy.com/media/SfrRifQ63n5fi/giphy.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2019/01/09/Modern-Fortraner/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Modern Fortraner | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2019/01/09/Modern-Fortraner/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Modern Fortraner
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-01-09 16:57:22" itemprop="dateCreated datePublished" datetime="2019-01-09T16:57:22+08:00">2019-01-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-25 20:13:35" itemprop="dateModified" datetime="2019-12-25T20:13:35+08:00">2019-12-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Fortran/" itemprop="url" rel="index"><span itemprop="name">Fortran</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/09/Modern-Fortraner/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/09/Modern-Fortraner/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">Fortran is less popular to mankind, but is very welcomed in scientific computing. Fortran is evolving with time to live up to good features in programming, so I am found of it and belive in its future.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://media.giphy.com/media/SfrRifQ63n5fi/giphy.gif" alt></p>
+<p>The road for me toward modern fortran began with a moving letter, the impact on me is significant. Here I depict the way to stand on the shoulder of experts, that is using great libraries.</p>
+<a id="more"></a>
+<h1 id="Awesome-Fortran"><a href="#Awesome-Fortran" class="headerlink" title="Awesome Fortran"></a><a href="https://github.com/rabbiabram/awesome-fortran" target="_blank" rel="noopener">Awesome Fortran</a></h1><ul>
+<li>First find the source code of the library.<ul>
+<li>datetime-fortran</li>
+<li><a href="https://wavebitscientific.github.io/functional-fortran/" target="_blank" rel="noopener">functional-fortran</a></li>
+<li>BLAS</li>
+<li>Lapack</li>
+</ul>
+</li>
+<li>…</li>
+</ul>
+<h1 id="Installation-of-Fortran-library"><a href="#Installation-of-Fortran-library" class="headerlink" title="Installation of Fortran library"></a>Installation of Fortran library</h1><h2 id="Build-with-cmake"><a href="#Build-with-cmake" class="headerlink" title="Build with cmake"></a>Build with cmake</h2><p>Make is a system to generate make files based on the platform (i.e. CMake is cross platform) which you can then make using the generated makefiles.</p>
+<h3 id="functional-fortran"><a href="#functional-fortran" class="headerlink" title="functional-fortran"></a><code>functional-fortran</code></h3><p>manual for <code>functional-fortran</code>, <a href="https://wavebitscientific.github.io/functional-fortran/" target="_blank" rel="noopener">https://wavebitscientific.github.io/functional-fortran/</a></p>
+<h3 id="datetime-fortran"><a href="#datetime-fortran" class="headerlink" title="datetime-fortran"></a><code>datetime-fortran</code></h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/wavebitscientific/datetime-fortran</span><br><span class="line"><span class="built_in">cd</span> datetime-fortran</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">ctest</span><br></pre></td></tr></tbody></table></figure>
+<p>The installation of a Fortran library simply consists to have <code>libxxx.a</code> and the companion <code>yyy.mod</code> files.<br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/path/to/datetime-fort$ ls build/</span><br><span class="line">CMakeCache.txt       Makefile             cmake_install.cmake</span><br><span class="line">CMakeFiles/          Testing/             include/</span><br><span class="line">CTestTestfile.cmake  bin/                 lib/</span><br><span class="line"></span><br><span class="line">/path/to/datetime-fort$ ls build/include/</span><br><span class="line">datetime_module.mod  mod_clock.mod        mod_datetime.mod     mod_timedelta.mod</span><br><span class="line">datetime_tests.mod   mod_constants.mod    mod_strftime.mod</span><br><span class="line"></span><br><span class="line">/path/to/datetime-fort$ ls build/lib/</span><br><span class="line">libdatetime.a</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="Usage-of-library-datetime-library"><a href="#Usage-of-library-datetime-library" class="headerlink" title="Usage of library datetime-library"></a>Usage of library <code>datetime-library</code></h3><ul>
+<li><p>A direct way</p>
+<p><code>FoBiS.py build -ext_libs datetime --lib_dir /path/to/datetime-fortran/build/lib --include /path/to/datetime-fortran/build/include</code></p>
+</li>
+</ul>
+<h2 id="Build-with-FoBiS-py"><a href="#Build-with-FoBiS-py" class="headerlink" title="Build with FoBiS.py"></a>Build with <code>FoBiS.py</code></h2><h3 id="Install-FoBiS-py-first"><a href="#Install-FoBiS-py-first" class="headerlink" title="Install FoBiS.py first"></a>Install <a href="https://github.com/szaghi/FoBiS.git" target="_blank" rel="noopener">FoBiS.py</a> first</h3><p>Fortran Building System for poor people.</p>
+<blockquote>
+<p> FoBiS.py is able to build almost automatically complex Fortran projects with cumbersome inter-modules dependency. This removes the necessity to write complex makefile.</p>
+</blockquote>
+<ul>
+<li><p>Manual Installation</p>
+<p>Since the network speed is poor, I installed it at the same time, the Python installer behaves far better than manual install.</p>
+</li>
+<li><p>PyPi Installation</p>
+<ul>
+<li><p><code>FoBiS.py</code> can be installed by means of <code>pip</code>.</p>
+<p>Does it support <code>pip3</code>?</p>
+<p>Yes, it does!<br>szaghi also kindly remind you that t you need root permissions if you are not using your <code>virtualenv</code> or you are trying to install FoBiS.py into your system space.</p>
+<p>I use <code>sudo -H pip3 install FoBiS.py</code>, It went well.  </p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Since <code>FoBiS.py</code> is well tested under the environment of pytho2.7x, it safe to revert back to python2.7x<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(base) /szaghi/FoBiS$ pip uninstall FoBiS.py</span><br><span class="line">(py27) /szaghi/FoBiS/release/FoBiS-master$ python setup install</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="Use-FoBis-py-to-build-Fortran-library-BeFoR64"><a href="#Use-FoBis-py-to-build-Fortran-library-BeFoR64" class="headerlink" title="Use FoBis.py to build Fortran library BeFoR64"></a>Use FoBis.py to build Fortran library <code>BeFoR64</code></h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">(py27) /szaghi/BeFoR64$ mkdir -p src/third_party/PENF/lib</span><br><span class="line">(py27) /szaghi/BeFoR64$ <span class="built_in">cd</span> src/third_party/PENF/lib/</span><br><span class="line">(py27) /szaghi/BeFoR64/src/third_party/PENF/lib$ ln -s ~/Playground/GH/awesome_fortran/szaghi/PENF/src/lib/* .</span><br><span class="line">(py27) /szaghi/BeFoR64/src/third_party/PENF/lib$ <span class="built_in">cd</span> -</span><br><span class="line">/Users/wangmiao/Playground/GH/awesome_fortran/szaghi/BeFoR64</span><br><span class="line">(py27) /szaghi/BeFoR64$ FoBiS.py build</span><br><span class="line">Builder options</span><br><span class="line">  Directories</span><br><span class="line">    Building directory: <span class="string">"shared"</span></span><br><span class="line">    Compiled-objects .o   directory: <span class="string">"shared/obj"</span></span><br><span class="line">    Compiled-objects .mod directory: <span class="string">"shared/mod"</span></span><br><span class="line">  Compiler options</span><br><span class="line">    Vendor: <span class="string">"gnu"</span></span><br><span class="line">    Compiler <span class="built_in">command</span>: <span class="string">"gfortran"</span></span><br><span class="line">    Module directory switch: <span class="string">"-J"</span></span><br><span class="line">    Compiling flags: <span class="string">"-cpp -c -fPIC -frealloc-lhs -O2"</span></span><br><span class="line">    Linking flags: <span class="string">"-shared -O2"</span></span><br><span class="line">    Preprocessing flags: <span class="string">""</span></span><br><span class="line">    Coverage: False</span><br><span class="line">    Profile: False</span><br><span class="line">  Preprocessor used: None</span><br><span class="line">  Preprocessor output directory: None</span><br><span class="line">  Preprocessor extensions processed: []</span><br><span class="line"></span><br><span class="line">Building src/lib/befor64.F90</span><br><span class="line">Compiling src/third_party/PENF/lib/penf_global_parameters_variables.F90 serially</span><br><span class="line">Compiling src/third_party/PENF/lib/penf_b_size.F90 serially</span><br><span class="line">Compiling src/third_party/PENF/lib/penf_stringify.F90 serially</span><br><span class="line">Compiling src/third_party/PENF/lib/penf.F90 serially</span><br><span class="line">Compiling src/lib/befor64_pack_data_m.F90 serially</span><br><span class="line">Compiling src/lib/befor64.F90 serially</span><br><span class="line">Linking shared/libbase64.so</span><br><span class="line">Target src/lib/befor64.F90 has been successfully built</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Use-FoBiS-py-to-build-StringIFor"><a href="#Use-FoBiS-py-to-build-StringIFor" class="headerlink" title="Use FoBiS.py to build StringIFor"></a>Use FoBiS.py to build <code>StringIFor</code></h3><ul>
+<li>Prepare the requirements.</li>
+<li><p><code>FoBiS.py build</code> to build all tests</p>
+<ul>
+<li><p>Build the library.</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># static-linked library by means of GNU gfortran</span></span><br><span class="line">FoBiS.py build -mode stringifor-static-gnu</span><br><span class="line"></span><br><span class="line"><span class="comment"># shared-linked library by means of GNU gfortran</span></span><br><span class="line">FoBiS.py build -mode stringifor-shared-gnu</span><br></pre></td></tr></tbody></table></figure>
+<p>So you can link the library while compiling an application rather than copy the raw code to it.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Use-FoBis-py-to-build-Fortran-library-forbear"><a href="#Use-FoBis-py-to-build-Fortran-library-forbear" class="headerlink" title="Use FoBis.py to build Fortran library forbear"></a>Use FoBis.py to build Fortran library <code>forbear</code></h2><p><code>forbear</code> is an awesome package is one that is mature (not recently released), is well<br>maintained, has a good amount of users, has good documentation, follows the best<br>practices, and which latest release is less than 1 year old.</p>
+<ol>
+<li><p>Checkout its dependency from subdirectory <code>forbear/src/third_party</code>, it depends on <code>Face</code></p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:szaghi/FACE.git</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>Checkout the requirements of <code>FACE</code> from  subdirectory <code>forbear/src/third_party</code>. It is independent of any library. Good!</p>
+</li>
+<li><p>Satisfy the installation requirement for <code>forbear</code></p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> forbear/src/third_party/FACE/lib</span><br><span class="line">ln -s ~/Playground/GH/awesome_fortran/szaghi/FACE/src/lib/ .</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>Install</p>
+<p><code>FoBiS.py build</code></p>
+<p>Error</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Attention: the file <span class="string">'src/lib/forbear_element_object.F90'</span> depends on <span class="string">'face'</span> that is unreachable</span><br></pre></td></tr></tbody></table></figure>
+<p>In step 3, the right command should be</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s ~/Playground/GH/awesome_fortran/szaghi/FACE/src/lib/* .</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<h2 id="Use-FoBiS-py-to-build-a-project-requring-external-library"><a href="#Use-FoBiS-py-to-build-a-project-requring-external-library" class="headerlink" title="Use FoBiS.py to build a project requring external library"></a>Use FoBiS.py to build a project requring external library</h2><p>An advanced way</p>
+  <figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir src/third_party/xx/lib</span><br><span class="line"><span class="built_in">cd</span> src/third_party/xx/lib</span><br><span class="line">ln -s /path/to/xx/src/lib/* .</span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line">FoBiS.py build</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="Using-external-libraries"><a href="#Using-external-libraries" class="headerlink" title="Using external libraries"></a>Using external libraries</h1><ul>
+<li><a href="https://github.com/szaghi/FoBiS/wiki/Linking-external-libraries" target="_blank" rel="noopener">Linking external libraries</a></li>
+<li><a href="https://users.humboldt.edu/finneyb/engr325/gfortrancompile.pdf" target="_blank" rel="noopener">Using gfortran with external libraries</a></li>
+</ul>
+<h1 id="Open-Coarrays"><a href="#Open-Coarrays" class="headerlink" title="Open Coarrays"></a><a href="https://github.com/sourceryinstitute/OpenCoarrays" target="_blank" rel="noopener">Open Coarrays</a></h1><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ cafrun -h</span><br><span class="line"></span><br><span class="line"> cafrun - Coarray Fortran executable launcher <span class="keyword">for</span> OpenCoarrays</span><br><span class="line"></span><br><span class="line"> Usage: cafrun [options] ...</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"> Example usage:</span><br><span class="line"></span><br><span class="line">   cafrun -np 2 foo foo_arg1 foo_arg2</span><br><span class="line">   cafrun -v</span><br><span class="line">   cafrun --<span class="built_in">help</span></span><br><span class="line">   cafrun --show</span><br><span class="line">   cafrun -s -np 4 my_exe</span><br><span class="line">   cafrun -np 4 --reenable-auto-cleanup ./my_exe arg1 arg2</span><br><span class="line"></span><br><span class="line"> Notes:</span><br><span class="line">   [options] must be a CAF executable file, one of the above arguments,</span><br><span class="line">   or an argument to the program name returned by caf --wraps</span><br><span class="line"></span><br><span class="line">$ cafrun --show <span class="comment"># Show the command that the wrapper will execute. You can pass this as the first argument and then the additional arguments that you're planning to pass to perform a dry run.</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/mpiexec -n <number_of_images> /path/to/coarray_Fortran_program [arg4 [arg5 [...]]]</number_of_images></span><br></pre></td></tr></tbody></table></figure>
+<p><code>caf - Fortran compiler wrapper for OpenCoarrays</code><br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ caf --show <span class="comment">#  Show how this wrapper will call the compiler and exit (dry run)</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/gfortran -I/usr/<span class="built_in">local</span>/Cellar/opencoarrays/2.3.1/include/OpenCoarrays-2.3.1_GNU-8.2.0 -fcoarray=lib -Wl,-flat_namespace -Wl,-commons,use_dylibs -L/usr/<span class="built_in">local</span>/Cellar/libevent/2.1.8/lib -L/usr/<span class="built_in">local</span>/Cellar/open-mpi/3.1.2/lib <span class="variable">${@}</span> /usr/<span class="built_in">local</span>/Cellar/opencoarrays/2.3.1/lib/libcaf_mpi.a /usr/<span class="built_in">local</span>/lib/libmpi_usempif08.dylib /usr/<span class="built_in">local</span>/lib/libmpi_usempi_ignore_tkr.dylib /usr/<span class="built_in">local</span>/lib/libmpi_mpifh.dylib /usr/<span class="built_in">local</span>/lib/libmpi.dylib</span><br><span class="line">$ cafrun -np 2 ./a.out</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1 id="programming-paradigm"><a href="#programming-paradigm" class="headerlink" title="programming paradigm"></a>programming paradigm</h1><p>While not designed as a purely functional programming language,<br>modern Fortran goes a long way by letting the programmer<br>use <code>pure</code> functions to encourage good functional discipline,<br>express code in mathematical form, and minimize bug-prone mutable state.<br>This library provides a set of commonly used tools in functional<br>programming, with the purpose to help Fortran programmers<br>be less imperative and more functional.</p>
+<p><a href="https://en.wikipedia.org/wiki/Imperative_programming" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Imperative_programming</a></p>
+<p>In computer science, imperative programming is a programming paradigm that uses statements that change a program’s state. </p>
+<p>The focus of procedural programming is to break down a programming task into a collection of variables, data structures, and subroutines, whereas in object-oriented programming it is to break down a programming task into objects that expose behavior (methods) and data (members or attributes) using interfaces. </p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fortran/" rel="tag"># Fortran</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/03/High-Performance-Computing/" rel="next" title="High Performance Computing">
+                <i class="fa fa-chevron-left"></i> High Performance Computing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/31/Bookmarks-collected-along-the-way/" rel="prev" title="Bookmarks collected along the way">
+                Bookmarks collected along the way <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Awesome-Fortran"><span class="nav-number">1.</span> <span class="nav-text">Awesome Fortran</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installation-of-Fortran-library"><span class="nav-number">2.</span> <span class="nav-text">Installation of Fortran library</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-with-cmake"><span class="nav-number">2.1.</span> <span class="nav-text">Build with cmake</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#functional-fortran"><span class="nav-number">2.1.1.</span> <span class="nav-text">functional-fortran</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#datetime-fortran"><span class="nav-number">2.1.2.</span> <span class="nav-text">datetime-fortran</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage-of-library-datetime-library"><span class="nav-number">2.1.3.</span> <span class="nav-text">Usage of library datetime-library</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-with-FoBiS-py"><span class="nav-number">2.2.</span> <span class="nav-text">Build with FoBiS.py</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-FoBiS-py-first"><span class="nav-number">2.2.1.</span> <span class="nav-text">Install FoBiS.py first</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-FoBis-py-to-build-Fortran-library-BeFoR64"><span class="nav-number">2.2.2.</span> <span class="nav-text">Use FoBis.py to build Fortran library BeFoR64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-FoBiS-py-to-build-StringIFor"><span class="nav-number">2.2.3.</span> <span class="nav-text">Use FoBiS.py to build StringIFor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-FoBis-py-to-build-Fortran-library-forbear"><span class="nav-number">2.3.</span> <span class="nav-text">Use FoBis.py to build Fortran library forbear</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-FoBiS-py-to-build-a-project-requring-external-library"><span class="nav-number">2.4.</span> <span class="nav-text">Use FoBiS.py to build a project requring external library</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Using-external-libraries"><span class="nav-number">3.</span> <span class="nav-text">Using external libraries</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Open-Coarrays"><span class="nav-number">4.</span> <span class="nav-text">Open Coarrays</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#programming-paradigm"><span class="nav-number">5.</span> <span class="nav-text">programming paradigm</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2019/01/09/Modern-Fortraner/';
+        this.page.identifier = '2019/01/09/Modern-Fortraner/';
+        this.page.title = 'Modern Fortraner';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

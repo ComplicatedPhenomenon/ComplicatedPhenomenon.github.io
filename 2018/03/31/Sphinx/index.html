@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Blog is not a good place to write professional notes, the structure there is less clear. You can share a new idea in a blog, but to present a detail implementation, readthedocs is a good choice.">
+<meta name="keywords" content="documentation tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sphinx">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/03/31/Sphinx/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="Blog is not a good place to write professional notes, the structure there is less clear. You can share a new idea in a blog, but to present a detail implementation, readthedocs is a good choice.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://media.giphy.com/media/NMjRRZOo9XtZe/giphy.gif">
+<meta property="og:image" content="https://tse2-mm.cn.bing.net/th?id=OIP.s0rdf2m0Ycae5PG1hrZPngHaB4&p=0&o=5&pid=1.1">
+<meta property="og:updated_time" content="2019-11-12T14:02:52.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sphinx">
+<meta name="twitter:description" content="Blog is not a good place to write professional notes, the structure there is less clear. You can share a new idea in a blog, but to present a detail implementation, readthedocs is a good choice.">
+<meta name="twitter:image" content="https://media.giphy.com/media/NMjRRZOo9XtZe/giphy.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/03/31/Sphinx/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Sphinx | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/03/31/Sphinx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Sphinx
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-31 10:27:21" itemprop="dateCreated datePublished" datetime="2018-03-31T10:27:21+08:00">2018-03-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-12 22:02:52" itemprop="dateModified" datetime="2019-11-12T22:02:52+08:00">2019-11-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Documentation-Tool/" itemprop="url" rel="index"><span itemprop="name">Documentation Tool</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/31/Sphinx/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/03/31/Sphinx/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">Blog is not a good place to write professional notes, the structure there is less clear. You can share a new idea in a blog, but to present a detail implementation, readthedocs is a good choice.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://media.giphy.com/media/NMjRRZOo9XtZe/giphy.gif" alt><br><a id="more"></a></p>
+<h2 id="Sphinx"><a href="#Sphinx" class="headerlink" title="Sphinx"></a>Sphinx</h2><p><img src="https://tse2-mm.cn.bing.net/th?id=OIP.s0rdf2m0Ycae5PG1hrZPngHaB4&p=0&o=5&pid=1.1" alt></p>
+<p>Sphinx was originally created for <a href="https://docs.python.org/" target="_blank" rel="noopener">the Python documentation</a>, and it has excellent facilities for the documentation of software projects in a range of languages. Of course, this site (<a href="http://www.sphinx-doc.org/en/master/" target="_blank" rel="noopener">Sphinx</a>) is also created from <em>reStructuredText</em> sources using Sphinx!</p>
+<p>Sphinx uses <em>reStructuredText</em> as its markup language, and many of its strengths come from the power and straightforwardness of <em>reStructuredText</em> and its parsing and translating suite, the <a href="http://docutils.sourceforge.net/" target="_blank" rel="noopener">Docutils</a>.</p>
+<p><a href="http://www.sphinx-doc.org/en/master/faq.html" target="_blank" rel="noopener">Sphinx FAQ</a></p>
+<h2 id="Quick-start"><a href="#Quick-start" class="headerlink" title="Quick start"></a>Quick start</h2><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin</span><br><span class="line">sphinx-apidoc      sphinx-autogen     sphinx-build       sphinx-quickstart</span><br></pre></td></tr></tbody></table></figure>
+<p>Sphinx comes with a script called sphinx-quickstart that sets up a source directory and creates a default conf.py with the most useful configuration values from a few questions it asks you. To use this, run:<br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">$ sphinx-quickstart</span><br><span class="line">Welcome to the Sphinx 1.7.2 quickstart utility.</span><br><span class="line"></span><br><span class="line">Please enter values <span class="keyword">for</span> the following settings (just press Enter to</span><br><span class="line">accept a default value, <span class="keyword">if</span> one is given <span class="keyword">in</span> brackets).</span><br><span class="line"></span><br><span class="line">Selected root path: .</span><br><span class="line"></span><br><span class="line">You have two options <span class="keyword">for</span> placing the build directory <span class="keyword">for</span> Sphinx output.</span><br><span class="line">Either, you use a directory <span class="string">"_build"</span> within the root path, or you separate</span><br><span class="line"><span class="string">"source"</span> and <span class="string">"build"</span> directories within the root path.</span><br><span class="line">> Separate <span class="built_in">source</span> and build directories (y/n) [n]:</span><br><span class="line"></span><br><span class="line">Inside the root directory, two more directories will be created; <span class="string">"_templates"</span></span><br><span class="line"><span class="keyword">for</span> custom HTML templates and <span class="string">"_static"</span> <span class="keyword">for</span> custom stylesheets and other static</span><br><span class="line">files. You can enter another prefix (such as <span class="string">"."</span>) to replace the underscore.</span><br><span class="line">> Name prefix <span class="keyword">for</span> templates and static dir [_]:</span><br><span class="line"></span><br><span class="line">The project name will occur <span class="keyword">in</span> several places <span class="keyword">in</span> the built documentation.</span><br><span class="line">> Project name: woody</span><br><span class="line">> Author name(s): Pixar</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">If the documents are to be written <span class="keyword">in</span> a language other than English,</span><br><span class="line">you can select a language here by its language code. Sphinx will <span class="keyword">then</span></span><br><span class="line">translate text that it generates into that language.</span><br><span class="line"></span><br><span class="line">For a list of supported codes, see</span><br><span class="line">http://sphinx-doc.org/config.html<span class="comment">#confval-language.</span></span><br><span class="line">> Project language [en]: 2018-05-13</span><br><span class="line"></span><br><span class="line">The file name suffix <span class="keyword">for</span> <span class="built_in">source</span> files. Commonly, this is either <span class="string">".txt"</span></span><br><span class="line">or <span class="string">".rst"</span>.  Only files with this suffix are considered documents.</span><br><span class="line">> Source file suffix [.rst]:</span><br><span class="line"></span><br><span class="line">One document is special <span class="keyword">in</span> that it is considered the top node of the</span><br><span class="line"><span class="string">"contents tree"</span>, that is, it is the root of the hierarchical structure</span><br><span class="line">of the documents. Normally, this is <span class="string">"index"</span>, but <span class="keyword">if</span> your <span class="string">"index"</span></span><br><span class="line">document is a custom template, you can also <span class="built_in">set</span> this to another filename.</span><br><span class="line">> Name of your master document (without suffix) [index]:</span><br><span class="line"></span><br><span class="line">Sphinx can also add configuration <span class="keyword">for</span> epub output:</span><br><span class="line">> Do you want to use the epub builder (y/n) [n]:</span><br><span class="line">Indicate <span class="built_in">which</span> of the following Sphinx extensions should be enabled:</span><br><span class="line">> autodoc: automatically insert docstrings from modules (y/n) [n]:</span><br><span class="line">> doctest: automatically <span class="built_in">test</span> code snippets <span class="keyword">in</span> doctest blocks (y/n) [n]:</span><br><span class="line">> intersphinx: link between Sphinx documentation of different projects (y/n) [n]:</span><br><span class="line">> todo: write <span class="string">"todo"</span> entries that can be shown or hidden on build (y/n) [n]:</span><br><span class="line">> coverage: checks <span class="keyword">for</span> documentation coverage (y/n) [n]:</span><br><span class="line">> imgmath: include math, rendered as PNG or SVG images (y/n) [n]:</span><br><span class="line">> mathjax: include math, rendered <span class="keyword">in</span> the browser by MathJax (y/n) [n]:</span><br><span class="line">> ifconfig: conditional inclusion of content based on config values (y/n) [n]:</span><br><span class="line">> viewcode: include links to the <span class="built_in">source</span> code of documented Python objects (y/n) [n]:</span><br><span class="line">> githubpages: create .nojekyll file to publish the document on GitHub pages (y/n) [n]:</span><br><span class="line"></span><br><span class="line">A Makefile and a Windows <span class="built_in">command</span> file can be generated <span class="keyword">for</span> you so that you</span><br><span class="line">only have to run e.g. make html instead of invoking sphinx-build</span><br><span class="line">directly.</span><br><span class="line">> Create Makefile? (y/n) [y]:</span><br><span class="line">> Create Windows <span class="built_in">command</span> file? (y/n) [y]:</span><br><span class="line"></span><br><span class="line">Creating file ./conf.py.</span><br><span class="line">Creating file ./index.rst.</span><br><span class="line">Creating file ./Makefile.</span><br><span class="line">Creating file ./make.bat.</span><br><span class="line"></span><br><span class="line">Finished: An initial directory structure has been created.</span><br><span class="line"></span><br><span class="line">You should now populate your master file ./index.rst and create other documentation</span><br><span class="line"><span class="built_in">source</span> files. Use the Makefile to build the docs, like so:</span><br><span class="line">   make builder</span><br><span class="line"><span class="built_in">where</span> builder is one of the supported builders, e.g. html, latex or linkcheck.</span><br><span class="line"></span><br><span class="line">$ ls</span><br><span class="line">_build  conf.py  index.rst  make.bat  Makefile  _static  _templates</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>运行 <code>sphinx-quickstart</code> 命令后，在工作目录中会出现如下类似的文件。工作目录的列表</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── Makefile</span><br><span class="line">├── _build　</span><br><span class="line">├── _static</span><br><span class="line">├── conf.py</span><br><span class="line">└── index.rst</span><br></pre></td></tr></tbody></table></figure>
+<p>让我们详细研究一下每个文件。<br>Makefile：编译过代码的开发人员应该非常熟悉这个文件，如果不熟悉，那么可以将它看作是一个包含指令的文件，在使用 make 命令时，可以使用这些指令来构建文档输出。</p>
+<ul>
+<li>_build：这是触发特定输出后用来存放所生成的文件的目录。</li>
+<li>_static：所有不属于源代码（如图像）一部分的文件均存放于此处，稍后会在构建目录中将它们链接在一起。</li>
+<li>conf.py：这是一个 Python 文件，用于存放 Sphinx 的配置值，包括在终端执行 sphinx-quickstart 时选中的那些值。</li>
+<li>index.rst：文档项目的 root 目录。如果将文档划分为其他文件，该目录会连接这些文件。<br>入门指南</li>
+</ul>
+<p>此时，我们已经正确安装了 Sphinx，查看了默认结构，并了解了一些基本语法。不要直接开始编写文档。缺乏布局和输出方面的知识会让您产生混淆，可能耽误您的整个进程。<br>现在来深入了解一下 index.rst 文件。它包含大量的信息和其他一些复杂的语法。为了更顺利地完成任务并避免干扰，我们将合并一个新文件，将它列在主要章节中。<br>在 index.rst 文件中的主标题之后，有一个内容清单，其中包括 toctree 声明。toctree 是将所有文档汇集到文档中的中心元素。如果有其他文件存在，但没有将它们列在此指令下，那么在构建的时候，这些文件不会随文档一起生成。</p>
+<p>我们想将一个新文件添加到文档中，并打算将其命名为 example.rst。还需要将它列在 toctree 中，但要谨慎操作。文件名后面需要有一个间隔，这样文件名清单才会有效，该文件不需要文件扩展名（在本例中为 .rst）。显示该列表的外观。在文件名距离左边距有三个空格的距离，maxdepth 选项后面有一个空白行。</p>
+<p>Then I want to have a look how sphinx took effect.<br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make html</span><br></pre></td></tr></tbody></table></figure><p></p>
+<ul>
+<li><a href="https://www.ibm.com/developerworks/cn/opensource/os-sphinx-documentation/index.html" target="_blank" rel="noopener">使文档变得更有效并且可编写</a></li>
+</ul>
+<p>I need a <code>template.rst</code> file. However, I have no idea about this language, luckily, I found the site built by sphinx has source code on its every page.</p>
+<h3 id="Theme-for-Sphinx-…"><a href="#Theme-for-Sphinx-…" class="headerlink" title="Theme for Sphinx …"></a>Theme for Sphinx <a href="http://www.sphinx-doc.org/en/master/theming.html" target="_blank" rel="noopener">…</a></h3><ul>
+<li><p>built-in theme</p>
+<p>To customize each theme, where the file is to be modified?</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls /usr/share/sphinx/</span><br><span class="line">ext  locale  pycode  scripts  search  templates  texinputs  themes</span><br><span class="line">$ ls /usr/share/sphinx/themes/</span><br><span class="line">agogo  bizstyle  default  haiku   nonav    scrolls    traditional</span><br><span class="line">basic  classic   epub     nature  pyramid  sphinxdoc</span><br></pre></td></tr></tbody></table></figure>
+<p>Configure <code>conf.py</code></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">html_theme = 'classic'</span><br><span class="line">...</span><br><span class="line">html_theme_options = {</span><br><span class="line">"rightsidebar" : True,</span><br><span class="line">"stickysidebar" : True,</span><br><span class="line">"collapsiblesidebar" : True,</span><br><span class="line">"bodyfont" : 'cursive'</span><br><span class="line">}</span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure>
+<p><a href="https://www.w3.org/Style/Examples/007/fonts.en.html" target="_blank" rel="noopener">CSS font family</a></p>
+</li>
+<li>non-built-in theme</li>
+</ul>
+<h2 id="Advanced-knowledge-after-familiar-with-the-basic"><a href="#Advanced-knowledge-after-familiar-with-the-basic" class="headerlink" title="Advanced knowledge after familiar with the basic"></a>Advanced knowledge after familiar with the basic</h2><h3 id="How-Sphinx-is-designed-for-python-documentation"><a href="#How-Sphinx-is-designed-for-python-documentation" class="headerlink" title="How Sphinx is designed for python documentation?"></a>How Sphinx is designed for python documentation?</h3><blockquote>
+<p>Originally, Sphinx was conceived for a single project, the documentation of the Python language. Shortly afterwards, it was made available for everyone as a documentation tool, but the documentation of Python modules remained deeply built in – the most fundamental directives, like function, were designed for Python objects.</p>
+</blockquote>
+<h2 id="Using-Sphinx-with-Read-the-Docs"><a href="#Using-Sphinx-with-Read-the-Docs" class="headerlink" title="Using Sphinx with Read the Docs"></a>Using Sphinx with <em>Read the Docs</em></h2><p><a href="https://readthedocs.org" target="_blank" rel="noopener">https://readthedocs.org</a> is a documentation hosting service based around Sphinx. They will host sphinx documentation, along with supporting a number of other features including version support, PDF generation, and more. The Getting Started guide is a good place to start.</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/documentation-tool/" rel="tag"># documentation tool</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/31/astroML/" rel="next" title="astroML">
+                <i class="fa fa-chevron-left"></i> astroML
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/04/How-to-learn-to-do-something/" rel="prev" title="How to learn to do something?">
+                How to learn to do something? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sphinx"><span class="nav-number">1.</span> <span class="nav-text">Sphinx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-start"><span class="nav-number">2.</span> <span class="nav-text">Quick start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Theme-for-Sphinx-…"><span class="nav-number">2.1.</span> <span class="nav-text">Theme for Sphinx …</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-knowledge-after-familiar-with-the-basic"><span class="nav-number">3.</span> <span class="nav-text">Advanced knowledge after familiar with the basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-Sphinx-is-designed-for-python-documentation"><span class="nav-number">3.1.</span> <span class="nav-text">How Sphinx is designed for python documentation?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Sphinx-with-Read-the-Docs"><span class="nav-number">4.</span> <span class="nav-text">Using Sphinx with Read the Docs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/03/31/Sphinx/';
+        this.page.identifier = '2018/03/31/Sphinx/';
+        this.page.title = 'Sphinx';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

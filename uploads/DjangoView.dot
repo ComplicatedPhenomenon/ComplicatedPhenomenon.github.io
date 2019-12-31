@@ -1,0 +1,21 @@
+digraph view_mechanism{
+label = "How view, url, templates work together?";
+node [shape = record];
+
+A [label = "Http\n Request", shape = plain];
+B [label = "URL\n urls.py"];
+C [label = "View\n (views.py)"];
+D [label = "Models\n (models.py)"];
+E [label = "Template\n (filename.html)"];
+F [label = "Http Response", shape = plain];
+G [label = "Database\n server", shape = ellipse];
+
+A->B;
+B->C;
+C->D;
+D->C;
+E->C;
+D->G;
+G->D;
+C->F;
+}

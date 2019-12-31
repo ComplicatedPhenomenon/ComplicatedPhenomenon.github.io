@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Data visualization is a way of showing data in an impressive way, moreover, you will form an instinct about the data.">
+<meta name="keywords" content="Mathematica">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Visualization">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/03/28/DataVisualizationTool/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="Data visualization is a way of showing data in an impressive way, moreover, you will form an instinct about the data.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://atlas.cern/sites/atlas-public.web.cern.ch/files/Hgg-FixedScale-Short2.gif">
+<meta property="og:updated_time" content="2019-11-12T14:02:52.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Data Visualization">
+<meta name="twitter:description" content="Data visualization is a way of showing data in an impressive way, moreover, you will form an instinct about the data.">
+<meta name="twitter:image" content="http://atlas.cern/sites/atlas-public.web.cern.ch/files/Hgg-FixedScale-Short2.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/03/28/DataVisualizationTool/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Data Visualization | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/03/28/DataVisualizationTool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Data Visualization
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-28 10:45:49" itemprop="dateCreated datePublished" datetime="2018-03-28T10:45:49+08:00">2018-03-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-12 22:02:52" itemprop="dateModified" datetime="2019-11-12T22:02:52+08:00">2019-11-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Data-Visualization/" itemprop="url" rel="index"><span itemprop="name">Data Visualization</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/28/DataVisualizationTool/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/03/28/DataVisualizationTool/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">Data visualization is a way of showing data in an impressive way, moreover, you will form an instinct about the data.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://atlas.cern/sites/atlas-public.web.cern.ch/files/Hgg-FixedScale-Short2.gif" style="width: 50%; height: 50%" ​><br><a id="more"></a></p>
+<h1 id="What-to-do-with-so-many-options"><a href="#What-to-do-with-so-many-options" class="headerlink" title="What to do with so many options?"></a>What to do with so many options?</h1><p>Data visualization in web is much or less connected with front-end technology, as a person aims to be a data scientist, they may have poor knowledge in it. Moreover, studying the front-end technology from scratch is not wise, learning the basic syntax of html, css and javascript is extremely boring and not helpful in some sense.  Therefore,  I determined to make use of the available JS library.</p>
+<p>Why? because it’s much more generic, implementing your very particular is theoretically possible once you are a master in the lower level knowledge. Why? well, you can see loads of frameworks but you don’t see many innovative programming languages, similarly, you can use a specific software quite well but you won’t know how to make a cool software just like this one, for that reason you needs to learn the groundwork of front-end technology.</p>
+<p>So why learning to use a library is necessary? Well, if you do everything from scratch, you won’t be able to fly? what does this supposed to mean? it means you can do everything from the very beginning, you will be able to travel at the speed of riding a bicycle, how about traveling at the speed of a car?, how about at the speed of a flight? You need to rely on what’s available at present time.</p>
+<h1 id="Data-visualization-tools"><a href="#Data-visualization-tools" class="headerlink" title="Data visualization tools"></a>Data visualization tools</h1><p>So far, I have discovered 5 tools for data visualization,</p>
+<p>JavaScript library</p>
+<ul>
+<li><a href="https://github.com/d3/d3/wiki/Gallery" target="_blank" rel="noopener">D3.js</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Plotly" target="_blank" rel="noopener">plotly.js</a></li>
+<li><a href="https://vega.github.io" target="_blank" rel="noopener">vega.js</a></li>
+</ul>
+<p>Python library</p>
+<ul>
+<li><p>Matplotlib</p>
+<p>A plotting tool for python, inspired by Matlab plotting.</p>
+</li>
+<li>seaborn</li>
+<li><p>plotly.py</p>
+<p>plotly.py -> plotly.js -> d3.js</p>
+</li>
+<li><p>Altair</p>
+<p>Altair -> vega.js -> d3.js</p>
+<p>Altair exposes a Python API for building statistical visualizations that follows Vega-Lite syntax.</p>
+</li>
+</ul>
+<p>Software</p>
+<ul>
+<li>Mathematica</li>
+<li>ROOT.<br>They are intended to apply in different occasions.</li>
+</ul>
+<p>I considered the following factors to justify whether or not its satisfy you.</p>
+<ul>
+<li>Is it generic and flexible?</li>
+<li>Is it easy to use?</li>
+<li>Is it informative and own impressive features?</li>
+</ul>
+<h2 id="Investigations-on-these-tools"><a href="#Investigations-on-these-tools" class="headerlink" title="Investigations on these tools"></a>Investigations on these tools</h2><h3 id="The-experience-from-skilled-people"><a href="#The-experience-from-skilled-people" class="headerlink" title="The experience from skilled people"></a>The experience from skilled people</h3><ul>
+<li><a href="https://blog.udacity.com/2016/03/12-best-charting-libraries-for-web-developers.html" target="_blank" rel="noopener">12 Best Charting Libraries for Web Developers</a></li>
+<li><a href="https://medium.com/@PepsRyuu/why-i-no-longer-use-d3-js-b8288f306c9a" target="_blank" rel="noopener">Why I no longer use d3?</a></li>
+<li><a href="https://github.com/vega/vega/wiki/Vega-and-D3" target="_blank" rel="noopener">D3.js vs vega</a></li>
+<li><a href="https://medium.freecodecamp.org/how-and-why-i-used-plotly-instead-of-d3-to-visualize-my-lollapalooza-data-d48345e2ca68" target="_blank" rel="noopener">Plotly vs D3.js</a></li>
+</ul>
+<h3 id="Summary-on-the-relevant-JS-library"><a href="#Summary-on-the-relevant-JS-library" class="headerlink" title="Summary on the relevant JS library"></a>Summary on the relevant JS library</h3><p>Most data visualization tool are based on <code>d3.js</code>, including <code>vega.js</code> and <code>plotly.js</code>. plotly API library is used to interact with <code>plotly.js</code>.</p>
+<ul>
+<li><p>d3 is best for: Hardcore charting experts not afraid to code.</p>
+<p>d3 is a little bit tricky, it takes lots of time for little learning. In other words, your goal might just be to build an interactive visualization with some well-known charts, which can be tricky too.</p>
+</li>
+<li><p>vega is best for: Developers who want the power of d3 without the complexity of learning it from scratch.</p>
+</li>
+<li><p><code>plotly.py</code> is a package designed to interact with the <code>plotly.js</code> library in order to allow Python users to create plots in their preferred environment.</p>
+</li>
+</ul>
+<p><span style="font-family:Papyrus; font-size:2em; color:red;"> Question: </span> what is the best data visualization tool for you?</p>
+<p>Before jumping into any specific library, I suggest to have a complete investigation of current popular library, Make sure you start learning the usage of a library meet your requirement, if you are uncertain about what do you need, you better save your time to build a solid foundation of JS.</p>
+<h1 id="Plotly"><a href="#Plotly" class="headerlink" title="Plotly"></a><a href="https://en.wikipedia.org/wiki/Plotly" target="_blank" rel="noopener">Plotly</a></h1><p>Plotly has mad library API for several libraries, but in which the language the core of Plotly is developed?</p>
+<blockquote>
+<p>Plotly was built using Python and the Django framework, with a front end using JavaScript and the visualization library D3.js, HTML and CSS. Files are hosted on Amazon S3.</p>
+</blockquote>
+<p>May I guess <code>plotly.js</code> is its core?</p>
+<p>Plotly products to take a try,</p>
+<ul>
+<li>API</li>
+<li><p>Dash</p>
+<p>Technology stack for Dash</p>
+<ul>
+<li><code>plotly.js</code> as its core feature</li>
+<li><code>React</code> as its front framework</li>
+<li><code>flask</code> as its Web framework<br>Combine the powerful tools together to create hands-on application, more specific, more adaptive to the needs in reality. Think about the situation, although you can do magnificent work from scratch just using few tools, like you can develop web applications using Django, however the work is tedious which very likely beyond your capability.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Plotly-py-example"><a href="#Plotly-py-example" class="headerlink" title="Plotly.py example"></a><code>Plotly.py</code> example</h2><ul>
+<li><a href="https://plot.ly/python/embedding-plotly-graphs-in-HTML/" target="_blank" rel="noopener">embedding graphs made by plotly in HTML </a></li>
+</ul>
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://plot.ly/~ComplicatedPhenomenon/4.embed" height="525" width="100%"></iframe>
+
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://plot.ly/~ComplicatedPhenomenon/7.embed" height="525" width="100%"></iframe>
+
+<h1 id="Vega"><a href="#Vega" class="headerlink" title="Vega"></a><a href="https://vega.github.io" target="_blank" rel="noopener">Vega</a></h1><h1 id="Altair"><a href="#Altair" class="headerlink" title="Altair"></a>Altair</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li>D3 example provided by <a href="https://bost.ocks.org/mike/" target="_blank" rel="noopener">Mike Bostock</a></li>
+<li><a href="http://setosa.io" target="_blank" rel="noopener">Statistics principle visualization</a></li>
+</ul>
+<p><span style="font-family: New York Times; font-size:1.5em; color: red"><br>Contents remains to be continued …
+</span></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mathematica/" rel="tag"># Mathematica</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/MarkdownExtensions/" rel="next" title="Markdown and It's Extensions">
+                <i class="fa fa-chevron-left"></i> Markdown and It's Extensions
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/31/astroML/" rel="prev" title="astroML">
+                astroML <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-to-do-with-so-many-options"><span class="nav-number">1.</span> <span class="nav-text">What to do with so many options?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-visualization-tools"><span class="nav-number">2.</span> <span class="nav-text">Data visualization tools</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Investigations-on-these-tools"><span class="nav-number">2.1.</span> <span class="nav-text">Investigations on these tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-experience-from-skilled-people"><span class="nav-number">2.1.1.</span> <span class="nav-text">The experience from skilled people</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary-on-the-relevant-JS-library"><span class="nav-number">2.1.2.</span> <span class="nav-text">Summary on the relevant JS library</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Plotly"><span class="nav-number">3.</span> <span class="nav-text">Plotly</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plotly-py-example"><span class="nav-number">3.1.</span> <span class="nav-text">Plotly.py example</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vega"><span class="nav-number">4.</span> <span class="nav-text">Vega</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Altair"><span class="nav-number">5.</span> <span class="nav-text">Altair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/03/28/DataVisualizationTool/';
+        this.page.identifier = '2018/03/28/DataVisualizationTool/';
+        this.page.title = 'Data Visualization';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

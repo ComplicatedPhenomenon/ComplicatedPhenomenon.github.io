@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Technical preparationCombine Jupyter Notebook with Jekyll blog, in a special case, we upload the local figure.  A detailed guide to blog with Jupyter notebook or a hands-on method. jupyter nbconvert -">
+<meta name="keywords" content="idea display methods">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Incorporate Jupyter notebook into Jekyll post">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/10/04/JupyterNotebook/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="Technical preparationCombine Jupyter Notebook with Jekyll blog, in a special case, we upload the local figure.  A detailed guide to blog with Jupyter notebook or a hands-on method. jupyter nbconvert -">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://complicatedphenomenon.gitlab.io/uploads/ScipyEcosystem_9_1.png">
+<meta property="og:updated_time" content="2019-12-07T05:35:44.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Incorporate Jupyter notebook into Jekyll post">
+<meta name="twitter:description" content="Technical preparationCombine Jupyter Notebook with Jekyll blog, in a special case, we upload the local figure.  A detailed guide to blog with Jupyter notebook or a hands-on method. jupyter nbconvert -">
+<meta name="twitter:image" content="https://complicatedphenomenon.gitlab.io/uploads/ScipyEcosystem_9_1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/10/04/JupyterNotebook/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Incorporate Jupyter notebook into Jekyll post | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/10/04/JupyterNotebook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Incorporate Jupyter notebook into Jekyll post
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-10-04 10:10:10" itemprop="dateCreated datePublished" datetime="2018-10-04T10:10:10+08:00">2018-10-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-07 13:35:44" itemprop="dateModified" datetime="2019-12-07T13:35:44+08:00">2019-12-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Documentation-Tool/" itemprop="url" rel="index"><span itemprop="name">Documentation Tool</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/04/JupyterNotebook/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/04/JupyterNotebook/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Technical-preparation"><a href="#Technical-preparation" class="headerlink" title="Technical preparation"></a>Technical preparation</h1><p>Combine Jupyter Notebook with Jekyll blog, in a special case, we upload the local figure.</p>
+<ul>
+<li><a href="https://www.linode.com/docs/applications/project-management/jupyter-notebook-on-jekyll/" target="_blank" rel="noopener">A detailed guide to blog with Jupyter notebook</a> or <a href="http://briancaffey.github.io/2016/03/14/ipynb-with-jekyll.html" target="_blank" rel="noopener">a hands-on method</a>.<ul>
+<li><code>jupyter nbconvert --to markdown xxxx.ipynb</code> or download xxxx.ipynb as Markdown</li>
+<li>Add the head block.</li>
+</ul>
+</li>
+<li><a href="http://sgeos.github.io/github/jekyll/2016/08/30/adding_images_and_downloads_to_a_github_pages_jekyll_blog.html" target="_blank" rel="noopener">Adding Images and Downloads to a GitHub Pages Jekyll Blog</a>.<ul>
+<li><code>Mkdir assets</code> under the top directory.</li>
+<li><code>![png](/assets/****.png)</code></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<p>Below contents is converted from Jupyter Notebook.</p>
+<h1 id="Numerical-python-ecosystem"><a href="#Numerical-python-ecosystem" class="headerlink" title="Numerical python ecosystem"></a>Numerical python ecosystem</h1><h2 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h2><ul>
+<li><a href="https://arogozhnikov.github.io/2015/11/29/using-fortran-from-python.html" target="_blank" rel="noopener">Using fortran from python</a></li>
+</ul>
+<h2 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h2><p>The most important part of the Pandas library is the DataFrame. A <code>DataFrame</code> holds the type of data you might think of as a table. This is similar to a sheet in Excel, or a table in a SQL database.</p>
+<p>Want to know the basic usage look like this?</p>
+<ul>
+<li><a href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">pandas source</a>.</li>
+</ul>
+<h2 id="Scipy"><a href="#Scipy" class="headerlink" title="Scipy"></a>Scipy</h2><ul>
+<li>Cadabra</li>
+</ul>
+<h2 id="Sklearn"><a href="#Sklearn" class="headerlink" title="Sklearn"></a>Sklearn</h2><p>I am eager to write numerous Python scripts to improve my skill in Python programming, but I haven’t find a proper opportunity. Then I determine to develop skills on data analysis and there already is a good beginning. When I find Kaggle, I suddenly get that it’s far better to host python notebook here. Since it can be displayed well and run on cloud. The old way I do it is local Jupyter notebook plus github plus nbviewer. However, Python notebook is slow to display on github and nbviewer can’t meet the need that you want to modify it and then test.</p>
+<p>During data analysis, I don’t need to write algorithm, and define function or class as it were all encapsulated in a library. That means even I know little about advanced knowledge with Python, just obey the usage of library is enough for me to accomplish my task. So I fail to get a proficient programming skill. I hate to place myself in such a dangerous situation.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">"all"</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg <span class="keyword">as</span> la</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</span><br><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line">sympy.init_printing()</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># activating magic</span></span><br><span class="line">%load_ext fortranmagic</span><br></pre></td></tr></tbody></table></figure>
+<p>The fortranmagic extension is already loaded. To reload it, use:</p>
+<pre><code>%reload_ext fortranmagic
+</code></pre><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%%fortran</span><br><span class="line">subroutine my_function(x, y, z)</span><br><span class="line">    real, intent(<span class="keyword">in</span>) :: x(:), y(:)</span><br><span class="line">    real, intent(out) :: z(size(x))</span><br><span class="line">    ! using vector operations</span><br><span class="line">    z(:) = sin(x(:) + y(:))</span><br><span class="line">end subroutine</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Now we can use this function</span></span><br><span class="line">x = numpy.random.normal(size=<span class="number">100</span>)</span><br><span class="line">y = numpy.random.normal(size=<span class="number">100</span>)</span><br><span class="line">z = my_function(x, y)</span><br></pre></td></tr></tbody></table></figure>
+<p>Step by step is too slow. In order to learn it, I need to implement something through using the tool.</p>
+<h2 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"></span><br><span class="line">X = np.arange(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">0.25</span>)</span><br><span class="line">Y = np.arange(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">0.25</span>)</span><br><span class="line">X, Y = np.meshgrid(X, Y)</span><br><span class="line">R = np.sqrt(X**<span class="number">2</span> + Y**<span class="number">2</span>)</span><br><span class="line">Z = np.sin(R)</span><br><span class="line"></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = Axes3D(fig)</span><br><span class="line">ax.plot_surface(X, Y, Z, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, cmap=cm.viridis)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></tbody></table></figure>
+<pre><code><mpl_toolkits.mplot3d.art3d.poly3dcollection at 0x101336e710>
+</mpl_toolkits.mplot3d.art3d.poly3dcollection></code></pre><p><img src="/uploads/ScipyEcosystem_9_1.png" alt="png"></p>
+<h1 id="Bonus-for-using-Jupyter-notebook"><a href="#Bonus-for-using-Jupyter-notebook" class="headerlink" title="Bonus for using Jupyter notebook"></a>Bonus for using Jupyter notebook</h1><h2 id="Why-there-is-Jupyter-Notebook"><a href="#Why-there-is-Jupyter-Notebook" class="headerlink" title="Why there is Jupyter Notebook?"></a>Why there is Jupyter Notebook?</h2><p>Advantage of JN.</p>
+<ul>
+<li><p>Cite from a talk given by Brian Granger</p>
+<blockquote>
+<p>Another really exciting thing is what O’Reilly Media is doing. They are embracing the notebook at a fairly deep level.The first is they have this new learning site.Along with this actual website, O’Reilly has this open source project called<a href="https://github.com/oreillymedia/thebe" target="_blank" rel="noopener"><code>thebe</code></a></p>
+<p>When I first saw this, I think part of my response was “wow, that’s a little bit like over kill me maybe”when you think about it, how much worse is it? Some one will publish article requiring this much analysis and leave that analysis out, there is no way anyone would ever be able to reproduce that work.</p>
+<p><a href="https://github.com/BuzzFeedNews/everything#libraries-and-tools" target="_blank" rel="noopener"><code>BuzzFeed</code> are doing fantastic work</a>. They had committed to do this for all of their data driven articles, they are not sort of after the fact making sort decisions about “well, should we open this or not”,they just said “we are doing it for everything”.</p>
+</blockquote>
+</li>
+<li>Interview with <a href="http://fperez.org/" target="_blank" rel="noopener">Fernado Perez</a> about <code>Ipython Projects</code>.</li>
+</ul>
+<h3 id="How-has-Jupyter-changed-the-way-you-work"><a href="#How-has-Jupyter-changed-the-way-you-work" class="headerlink" title="How has Jupyter changed the way you work?"></a>How has Jupyter changed the way you work?</h3><p>Having repeatable work that can be packaged and shared with others provides an enormous boost for how we work together. Jupyter Notebooks give context to the code. When you share your work, you’re not just sharing some source files that have to be deciphered; you’re sharing a whole train of thought, which makes it much easier to see what’s going on. This isn’t just true for your team members; it’s equally true if you drop something and come back six months later.</p>
+<h3 id="Acadiemia"><a href="#Acadiemia" class="headerlink" title="Acadiemia"></a><a href="https://conferences.oreilly.com/jupyter/jup-ny/public/schedule/detail/59848?ut" target="_blank" rel="noopener">Acadiemia</a></h3><p>Poor reproducibility reality: Reports of a lack of reproducibility and transparency have led funders and others to require open data and code as part of their published outputs. However, current academic publishing systems still cannot support the solutions that technology has enabled, such as the Jupyter Notebook. Mark Hahnel and Marius Tulbure discuss the opportunities for Jupyter notebooks to be the final output of academic research, arguing that Jupyter could help disrupt the inefficiencies in cost and scale of open access academic publishing.</p>
+<ul>
+<li><a href="https://conferences.oreilly.com/jupyter/jup-ny/public/schedule/detail/59848?ut=tw-data-na-article-lgen_paco_nathan_jupyter_as" target="_blank" rel="noopener">Closing the gap between Jupyter and academic publishing</a></li>
+</ul>
+<h2 id="Techniques-in-using-Jupyter-Notebook"><a href="#Techniques-in-using-Jupyter-Notebook" class="headerlink" title="Techniques in using Jupyter Notebook"></a>Techniques in using Jupyter Notebook</h2><ul>
+<li><a href="https://nbviewer.jupyter.org" target="_blank" rel="noopener">Nbviewer</a></li>
+<li><p><a href="http://echorand.me/presentation-slides-with-jupyter-notebook.html" target="_blank" rel="noopener">presentation-slides-with-jupyter-notebook</a></p>
+<ul>
+<li><a href="https://nbviewer.jupyter.org/urls/losc.ligo.org/s/events/LOSC_Event_tutorial.ipynb" target="_blank" rel="noopener">LIGO_LOSC_Event</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Install-Jupyter-extensions-collections"><a href="#Install-Jupyter-extensions-collections" class="headerlink" title="Install Jupyter extensions collections"></a>Install Jupyter extensions collections</h2><ul>
+<li><a href="https://github.com/ipython-contrib/jupyter_contrib_nbextensions" target="_blank" rel="noopener">https://github.com/ipython-contrib/jupyter_contrib_nbextensions</a></li>
+<li><a href="https://ndres.me/post/best-jupyter-notebook-extensions" target="_blank" rel="noopener">https://ndres.me/post/best-jupyter-notebook-extensions</a></li>
+<li>jupytext</li>
+</ul>
+<h2 id="28-Jupyter-Notebook-tips-tricks-and-shortcuts"><a href="#28-Jupyter-Notebook-tips-tricks-and-shortcuts" class="headerlink" title="28 Jupyter Notebook tips, tricks, and shortcuts"></a><a href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/" target="_blank" rel="noopener">28 Jupyter Notebook tips, tricks, and shortcuts</a></h2><p>What if you want to see the value of multiple statements at once?<br></p><figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">"all"</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="Use-CSS-to-diversify-information-display"><a href="#Use-CSS-to-diversify-information-display" class="headerlink" title="Use CSS to diversify information display."></a>Use CSS to diversify information display.</h2><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag"><<span class="name">span</span> <span class="attr">style</span>=<span class="string">"font-family:Papyrus; font-size:2em; color:red;"</span>></span></span><br><span class="line">Content</span><br><span class="line"><span class="tag">span</span>></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Font family cheatsheet examples:<ul>
+<li><span style="font-family:Papyrus; font-size:1em; color:red;"> Papyrusn</span></li>
+<li><span style="font-family:Cosmic Sans MS; font-size:1em; color:red;"> Cosmic Sans MS </span></li>
+<li><span style="font-family:New York Times; font-size:1em; color:red;"> New York Times</span></li>
+<li><span style="font-family:Helvetica; font-size:1em; color:red;"> Helvetica</span></li>
+<li><span style="font-family:Monospace; font-size:1em; color:red;"> Monospace</span></li>
+<li><span style="font-family:Script; font-size:1em; color:red;"> Script</span></li>
+</ul>
+</li>
+<li><a href="https://www.cssfontstack.com/" target="_blank" rel="noopener">https://www.cssfontstack.com</a></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/idea-display-methods/" rel="tag"># idea display methods</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/28/Jekyll/" rel="next" title="Using Jekyll to make static website">
+                <i class="fa fa-chevron-left"></i> Using Jekyll to make static website
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/19/Graphviz/" rel="prev" title="Graphviz">
+                Graphviz <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Technical-preparation"><span class="nav-number">1.</span> <span class="nav-text">Technical preparation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numerical-python-ecosystem"><span class="nav-number">2.</span> <span class="nav-text">Numerical python ecosystem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Numpy"><span class="nav-number">2.1.</span> <span class="nav-text">Numpy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas"><span class="nav-number">2.2.</span> <span class="nav-text">Pandas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scipy"><span class="nav-number">2.3.</span> <span class="nav-text">Scipy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sklearn"><span class="nav-number">2.4.</span> <span class="nav-text">Sklearn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matplotlib"><span class="nav-number">2.5.</span> <span class="nav-text">Matplotlib</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bonus-for-using-Jupyter-notebook"><span class="nav-number">3.</span> <span class="nav-text">Bonus for using Jupyter notebook</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-there-is-Jupyter-Notebook"><span class="nav-number">3.1.</span> <span class="nav-text">Why there is Jupyter Notebook?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-has-Jupyter-changed-the-way-you-work"><span class="nav-number">3.1.1.</span> <span class="nav-text">How has Jupyter changed the way you work?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Acadiemia"><span class="nav-number">3.1.2.</span> <span class="nav-text">Acadiemia</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Techniques-in-using-Jupyter-Notebook"><span class="nav-number">3.2.</span> <span class="nav-text">Techniques in using Jupyter Notebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Jupyter-extensions-collections"><span class="nav-number">3.3.</span> <span class="nav-text">Install Jupyter extensions collections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-Jupyter-Notebook-tips-tricks-and-shortcuts"><span class="nav-number">3.4.</span> <span class="nav-text">28 Jupyter Notebook tips, tricks, and shortcuts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-CSS-to-diversify-information-display"><span class="nav-number">3.5.</span> <span class="nav-text">Use CSS to diversify information display.</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/10/04/JupyterNotebook/';
+        this.page.identifier = '2018/10/04/JupyterNotebook/';
+        this.page.title = 'Incorporate Jupyter notebook into Jekyll post';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

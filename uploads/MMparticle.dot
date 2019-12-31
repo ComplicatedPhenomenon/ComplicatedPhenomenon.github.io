@@ -1,0 +1,27 @@
+digraph view_mechanism{
+label = "A software network for particle physics";
+node [shape = record];
+
+A1[label="FeynRules"];
+A2[label="FeynArts"];
+A3[label="FormCalc"];
+A4[label="FeynCalc"];
+A5[label="LoopTools"];
+A6[label="MadGraph5_aMC@NLO"];
+A7[label="ROOT"];
+B1[label = "CompHEP"];
+B2[label = "CalcHEP"];
+C1[label = "Delphes"];
+D1 [label = "Hadronization", shape = ellipse]
+C2[label = "Pythia8"];
+D2[label="Detector\nsimulation", shape = ellipse]
+C3[label="MadAnalysis5"];
+
+A1->A2->{A3;A4;A5};
+A1->{B1;B2};
+A1->A6;
+A6->{A7;C1;C2;C3}[color="red"];
+C1->D1;
+C2->D2
+
+}

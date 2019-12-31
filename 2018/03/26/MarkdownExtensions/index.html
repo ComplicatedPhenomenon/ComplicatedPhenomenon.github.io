@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Tools for Writing attractive documentation with less tedious work.">
+<meta name="keywords" content="documentation tool,web development">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown and It&#39;s Extensions">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/03/26/MarkdownExtensions/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="Tools for Writing attractive documentation with less tedious work.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://media.giphy.com/media/m3G118vAT91PW/giphy.gif">
+<meta property="og:updated_time" content="2019-11-12T14:02:52.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown and It&#39;s Extensions">
+<meta name="twitter:description" content="Tools for Writing attractive documentation with less tedious work.">
+<meta name="twitter:image" content="https://media.giphy.com/media/m3G118vAT91PW/giphy.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/03/26/MarkdownExtensions/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Markdown and It's Extensions | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/03/26/MarkdownExtensions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Markdown and It's Extensions
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-26 11:17:25" itemprop="dateCreated datePublished" datetime="2018-03-26T11:17:25+08:00">2018-03-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-12 22:02:52" itemprop="dateModified" datetime="2019-11-12T22:02:52+08:00">2019-11-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Documentation-Tool/" itemprop="url" rel="index"><span itemprop="name">Documentation Tool</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/26/MarkdownExtensions/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/03/26/MarkdownExtensions/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">Tools for Writing attractive documentation with less tedious work.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://media.giphy.com/media/m3G118vAT91PW/giphy.gif" alt></p>
+<a id="more"></a>
+<p>Obviously, this post should be divided in two parts, the part introducing extra features to webpage doesn’t fit main theme of this post.</p>
+<h1 id="Rendering-extra-features-to-the-webpage"><a href="#Rendering-extra-features-to-the-webpage" class="headerlink" title="Rendering extra features to the webpage"></a>Rendering extra features to the webpage</h1><p>The abstract title for this section may seem like it didn’t fit the key point of this post, actually it does, I intended to display extra features to basic webpage, the basic webpage I created is from convert markdown to html.</p>
+<h2 id="What’s-the-point-of-using-these-JS-libraries"><a href="#What’s-the-point-of-using-these-JS-libraries" class="headerlink" title="What’s the point of using these JS libraries"></a>What’s the point of using these JS libraries</h2><ul>
+<li>[ ] To get familiar with JavaScript</li>
+<li><p>[x] To make data analyzation in an attractive, intuitive and interactive way</p>
+<p>Put effort on</p>
+<ul>
+<li>Understanding its architecture and design</li>
+<li>Learning the usage of its API</li>
+</ul>
+</li>
+</ul>
+<h2 id="Embed-JS-in-Html"><a href="#Embed-JS-in-Html" class="headerlink" title="Embed JS in Html"></a>Embed JS in Html</h2><p>Take a try with</p>
+<ul>
+<li>Bootstrap and React</li>
+<li><code>D3.js</code>, <code>vega.js</code> and <code>Plotly.js</code></li>
+</ul>
+<p>I hope through this practice, I could customize my post page style.</p>
+<p>There are 2 available options to use JS library as far as I know.</p>
+<ul>
+<li><p>Locally provided this JS library. it means download the source code and add it to the website source code.</p>
+<p>The cons might be like you only use a little feature of it but you have to carry around the whole library all the time.</p>
+</li>
+<li>Fetch it online. The cons would be maybe some library would be blocked from the firewall.</li>
+</ul>
+<p>How to debug the JS code locally at first? To implement this on Mac, the method is install <code>MAMP</code> then host the files under directory <code>/Applications/MAMP/htdocs/</code>, then access it through the web browser.</p>
+<p>That means setting up MAMP local testing server, I’ve done this before, now I don’t remember what exactly the procedure is. Again, I pick up the lost memory.</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /Applications/MAMP/htdocs/vega <span class="comment"># -p creates the entire directory tree up to the given directory.</span></span><br><span class="line">$ vim index.html</span><br><span class="line">$ mv index.html /Applications/MAMP/htdocs/vega</span><br></pre></td></tr></tbody></table></figure>
+<p>Accessing  <code>http://localhost:8888/vega/</code> to check out the effects. To see more details, visit <a href="https://github.com/VisitToAStar/front-end-stuff" target="_blank" rel="noopener">here</a>.</p>
+<p>They encapsulate the library for you to make the using procedure as painless as possible.</p>
+<ul>
+<li><a href="https://vega.github.io/vega-lite/usage/embed.html" target="_blank" rel="noopener">use Vega-Lite on your own web page </a></li>
+</ul>
+<h2 id="Embed-Math-formula"><a href="#Embed-Math-formula" class="headerlink" title="Embed Math formula"></a>Embed Math formula</h2><ul>
+<li><p><code>Mathjax</code> | <a href="https://www.mathjax.org/#gettingstarted" target="_blank" rel="noopener">A JavaScript display engine for mathematics that works in all browsers. No more setup for readers. It just works.</a></p>
+<ul>
+<li>MathML(Mathematics Markup Language) and Latex</li>
+</ul>
+<p>A more authoritative explanation. <a href="https://www.w3.org/Math/MJ/Overview.html" target="_blank" rel="noopener">Putting mathematics on the Web with MathJax</a></p>
+<p> Here is <a href="https://stackoverflow.com/a/49452142" target="_blank" rel="noopener">a sample</a> to show how it work:</p>
+ <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><!DOCTYPE html></span></span><br><span class="line"><span class="tag"><<span class="name">html</span>></span></span><br><span class="line"><span class="tag"><<span class="name">head</span>></span></span><br><span class="line"><span class="tag"><<span class="name">title</span>></span>TeX and MathML in one file<span class="tag">title</span>></span><br><span class="line"><span class="tag"><<span class="name">script</span>   <span class="attr">src</span>=<span class="string">"https://cdnJS.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.JS?config=TeX-MML-AM_CHTML"</span>></span><span class="undefined"></span><span class="tag">script</span>></span><br><span class="line"><span class="tag">head</span>></span><br><span class="line"><span class="tag"><<span class="name">body</span>></span></span><br><span class="line"></span><br><span class="line">Both \(1+x\) and <span class="tag"><<span class="name">math</span>></span><span class="tag"><<span class="name">mi</span>></span>x<span class="tag">mi</span>></span><span class="tag"><<span class="name">mo</span>></span>+<span class="tag">mo</span>><span class="tag"><<span class="name">mn</span>></span>1<span class="tag">mn</span>><span class="tag">math</span>> are the same.<br><span class="line"></span><br><span class="line"><span class="tag">body</span>></span><br><span class="line"><span class="tag">html</span>></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>There is a multitude of options to display mathematics on the web including <em>MathJax</em>, <em>Katex</em>, <em>MathML</em> and <em>Latex2Image</em>. Which one is right for you? <a href="https://www.bersling.com/2016/05/10/displaying-math-on-the-web/" target="_blank" rel="noopener">click</a></p>
+</li>
+<li><p>You can’t really compare <em>MathJax</em> and <em>MathML</em> as they are different things. <a href="https://tex.stackexchange.com/a/2722/127717" target="_blank" rel="noopener">click</a></p>
+</li>
+<li><p><em>jQuery</em>  is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use <em>API</em> that works across a multitude of browsers. With a combination of versatility and extensibility, <em>jQuery</em> has changed the way that millions of people write JavaScript.</p>
+</li>
+</ul>
+<h1 id="Tools-combined-with-Markdown"><a href="#Tools-combined-with-Markdown" class="headerlink" title="Tools combined with Markdown"></a>Tools combined with Markdown</h1><h2 id="pandoc"><a href="#pandoc" class="headerlink" title="pandoc"></a>pandoc</h2><p>Extensible Markdown versus latex.</p>
+<ul>
+<li><a href="http://www.chriskrycho.com/2015/academic-markdown-and-citations.html" target="_blank" rel="noopener">Academic Markdown and Citations</a></li>
+<li>Presentation slides with Jupyter Notebook</li>
+<li><a href="https://readthedocs.org" target="_blank" rel="noopener">Read the Docs</a></li>
+</ul>
+<p>Building an academic CV.</p>
+<ul>
+<li><p><a href="https://blm.io/blog/markdown-academic-cv/" target="_blank" rel="noopener">Markdown+CSS</a></p>
+</li>
+<li><p><a href="https://blog.chmd.fr/editing-a-cv-in-markdown-with-pandoc.html" target="_blank" rel="noopener">Editing a CV in markdown with pandoc</a></p>
+</li>
+</ul>
+<h2 id="remark"><a href="#remark" class="headerlink" title="remark"></a>remark</h2><p>A simple, in-browser, markdown-driven slideshow tool.</p>
+<p>Browse the local html file,</p>
+<ul>
+<li><p>Place source code under <code>/Applications/MAMP/htdocs</code></p>
+<ul>
+<li><p><span style="font-family: papyrus;color: red"> how to open html on Mac? </span></p>
+<p>Document Root Click on to select where your html/PHP files and images are stored. This directory is called the document root. The default document root in MAMP is: <code>/Applications/MAMP/htdocs</code>.</p>
+</li>
+<li><p>A trap</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/cjwit/remark_lectures.git</span><br><span class="line">Cloning into <span class="string">'remark_lectures'</span>...</span><br><span class="line">remote: Enumerating objects: 611, <span class="keyword">done</span>.</span><br><span class="line">Receiving objects:  21% (130/611), 104.20 MiB | 5.19 MiB/s     </span><br><span class="line"></span><br><span class="line">Receiving objects:  22% (137/611), 211.17 MiB | 3.97 MiB/s</span><br></pre></td></tr></tbody></table></figure>
+<p>Fxxx, A big waste. <a href="https://github.com/harshjv/github-repo-size" target="_blank" rel="noopener">A life saver chrome plugin github-repo-size</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>It can be accomplished in <a href="https://gist.github.com/willurd/5720255" target="_blank" rel="noopener">multiple ways</a></p>
+<p>e.g. <code>python3 -m http.server</code>. Chrome didn’t work! Safari worked.</p>
+</li>
+</ul>
+<h2 id="MaTiSSe"><a href="#MaTiSSe" class="headerlink" title="MaTiSSe"></a><a href="https://github.com/szaghi/MaTiSSe" target="_blank" rel="noopener">MaTiSSe</a></h2><p>MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple markdown syntax producing high quality first-class html/css presentation with great support for scientific contents.</p>
+<h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><ul>
+<li><p><a href="https://www.johnhawthorn.com/2018/01/this-website-is-a-makefile/" target="_blank" rel="noopener">Build a website from makefile</a></p>
+<blockquote>
+<p>I’ve been through a few blog engines, but for the past few years I’ve been generating this blog from a Makefile.</p>
+</blockquote>
+<ul>
+<li><a href="https://www.gnu.org/software/make/manual/" target="_blank" rel="noopener">GNU Make Manual</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="The-difficult-part"><a href="#The-difficult-part" class="headerlink" title="The difficult part"></a>The difficult part</h1><p>Markdown extensions need to know much more front-end web knowledge. That’s why my <a href="https://complicatedphenomenon.github.io/books/" target="_blank" rel="noopener">book page</a> is still empty. That’s also why I can only use other people’s templates instead of writing my own style.</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/documentation-tool/" rel="tag"># documentation tool</a>
+          
+            <a href="/tags/web-development/" rel="tag"># web development</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/11/Anaconda/" rel="next" title="Anaconda">
+                <i class="fa fa-chevron-left"></i> Anaconda
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/28/DataVisualizationTool/" rel="prev" title="Data Visualization">
+                Data Visualization <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Rendering-extra-features-to-the-webpage"><span class="nav-number">1.</span> <span class="nav-text">Rendering extra features to the webpage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s-the-point-of-using-these-JS-libraries"><span class="nav-number">1.1.</span> <span class="nav-text">What’s the point of using these JS libraries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Embed-JS-in-Html"><span class="nav-number">1.2.</span> <span class="nav-text">Embed JS in Html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Embed-Math-formula"><span class="nav-number">1.3.</span> <span class="nav-text">Embed Math formula</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tools-combined-with-Markdown"><span class="nav-number">2.</span> <span class="nav-text">Tools combined with Markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pandoc"><span class="nav-number">2.1.</span> <span class="nav-text">pandoc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remark"><span class="nav-number">2.2.</span> <span class="nav-text">remark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MaTiSSe"><span class="nav-number">2.3.</span> <span class="nav-text">MaTiSSe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile"><span class="nav-number">2.4.</span> <span class="nav-text">Makefile</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-difficult-part"><span class="nav-number">3.</span> <span class="nav-text">The difficult part</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/03/26/MarkdownExtensions/';
+        this.page.identifier = '2018/03/26/MarkdownExtensions/';
+        this.page.title = 'Markdown and It\'s Extensions';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

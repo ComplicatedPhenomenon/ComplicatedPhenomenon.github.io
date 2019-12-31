@@ -1,0 +1,36 @@
+digraph G {
+label = "The Set of Software and Methods related with Hexo";
+node [shape = record];
+
+o [label = "Hexo"];
+
+part1 [label = "Part1: Build website", color = green, shape = ellipse];
+p1a1 [label = "npm"];
+p1a2 [label = "Node.js"]
+p1a3 [label = "JavaScript"]
+p1a4 [label = "Theme", shape = ellipse ];
+p1a4b [label = "Enable complex function", shape = ellipse]
+
+part2 [label = "Part2: Host the code repository",color = green, shape = ellipse];
+p2a [label = "Git"];
+p2ab1 [label = "GitHub"];
+p2ab2 [label = "GitLab"];
+p2ab3 [label = "BitBucket"];
+
+part3 [label = "Part3: Deploy", color = green, shape = ellipse];
+p3a1 [label = "GitHub pages"];
+p3a2 [label = "Heroku"];
+p3a3 [label = "Netlify"];
+p3a4 [label = "Rsync"];
+p3a5 [label = "...Other Methods"];
+p3a5b [label = "Copy public folder to where you like", shape = ellipse];
+
+o->{part1;part2;part3};
+part1->{p1a1;p1a2;p1a3;p1a4};
+p1a4->{p1a4b};
+part2->{p2a};
+p2a->{p2ab1;p2ab2;p2ab3};
+
+part3->{p3a1;p3a2;p3a3;p3a4;p3a5}[color="#FFFF00"];
+p3a5->{p3a5b};
+}

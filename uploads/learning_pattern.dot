@@ -1,0 +1,21 @@
+digraph G {
+label = "A representative events sequence when I learned a complicated thing";
+node [shape = record];
+
+
+a1 [label = "Experimental \n techniques"];
+a2 [label = "VEGAS algorithm"];
+a3 [label = "Monte Carlo \n integration"];
+a4 [label = "Variance"];
+a5 [label = "Chi-squared \n test"];
+a6 [label = "Chi-squared \n distribution"];
+a7 [label = "Gamma distribution"];
+a8 [label = "Plot the \n Gamma distribution\n in Python"];
+a9 [label = "Study the properties \n of Gamma distribution"];
+a10 [label = "A series of\n  computation"];
+a11 [label = "Manage the computation\n via programming"];
+
+a1->a2->a3->a4->a5->a6->a7->a8->a9;
+a9->a10[label="To familiarize \n language of Statistics", fontcolor=darkgreen];
+a10->a11;
+}

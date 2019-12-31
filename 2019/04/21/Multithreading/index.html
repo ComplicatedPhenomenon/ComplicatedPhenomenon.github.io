@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Make full use of an PC&apos;s computation capacity">
+<meta name="keywords" content="HPC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multithreading principle">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2019/04/21/Multithreading/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="Make full use of an PC&apos;s computation capacity">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://media.giphy.com/media/HrsNyjB5yuKZO/giphy.gif">
+<meta property="og:updated_time" content="2019-11-12T14:02:52.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Multithreading principle">
+<meta name="twitter:description" content="Make full use of an PC&apos;s computation capacity">
+<meta name="twitter:image" content="https://media.giphy.com/media/HrsNyjB5yuKZO/giphy.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2019/04/21/Multithreading/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Multithreading principle | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2019/04/21/Multithreading/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Multithreading principle
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-21 09:05:28" itemprop="dateCreated datePublished" datetime="2019-04-21T09:05:28+08:00">2019-04-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-12 22:02:52" itemprop="dateModified" datetime="2019-11-12T22:02:52+08:00">2019-11-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Parallel-Programming/" itemprop="url" rel="index"><span itemprop="name">Parallel Programming</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/21/Multithreading/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/21/Multithreading/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">Make full use of an PC's computation capacity</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://media.giphy.com/media/HrsNyjB5yuKZO/giphy.gif" style="width: 60%; height: 60%" ​><br>I will try to demonstrate how multithreading works? In other words, how OS, CPU, memory, registers join together to implement multithreading?<br><a id="more"></a></p>
+<p>When you first take a peek of multithreading, you should know what does it existed for, then you know how to multithread in every programming language, well, you meet the its syntax, yet you don’t know how the function was implemented, they encapsulate the function into API<sup><a href="#fn_1" id="reffn_1">1</a></sup><sup><a href="#fn_2" id="reffn_2">2</a></sup>, only you look up the the manual then you know what’s this function is used for, what’s its input parameters and return value. The API still doesn’t help you know the working mechanism, if you don’t go through the source code, which is based on the principle of multithreading.</p>
+<p>Why do you need to know the principle? Well, because you need to fully understand it then you can write your own API to implement multithreading.</p>
+<p>Why do you need to write your own API? because only you know every detail then your knowledge become transformative enough, that’s how you adapt your knowledge to solve the real world problem and dig further.</p>
+<h2 id="How-are-threads-scheduled-to-physical-CPUs"><a href="#How-are-threads-scheduled-to-physical-CPUs" class="headerlink" title="How are threads scheduled to physical CPUs?"></a>How are threads scheduled to physical CPUs?</h2><blockquote>
+<p>Well, the OS sets the physical CPU registers to the appropriate values and jumps to the location where the thread was last interrupted (which in effect sets the instruction pointer). At this point the OS has lost control and is no longer involved. It can only regain control if a hardware interrupt occurs or some other physical CPU core decides to take control of the CPU.</p>
+</blockquote>
+<h2 id="How-to-multithread-your-code-in-C"><a href="#How-to-multithread-your-code-in-C" class="headerlink" title="How to multithread your code in C?"></a>How to multithread your code in C?</h2><p><a href="https://software.intel.com/en-us/articles/threading-models-for-high-performance-computing-pthreads-or-openmp" target="_blank" rel="noopener">Threading Models for High-Performance Computing: Pthreads or OpenMP?</a></p>
+<p>There are 2 built-in libraries for</p>
+<ul>
+<li>OpenMP</li>
+<li><p>Pthreads</p>
+<p> Pthreads are occasionally referred to as POSIX(Portable Operating System Interface) threads. Essentially, the POSIX committee defined a basic set of functions and data structures that it hoped would be adopted by numerous vendors so that threaded code could be ported easily across operating systems.</p>
+<p><a href="https://randu.org/tutorials/threads/" target="_blank" rel="noopener">POSIX pthreads tutorial</a>.</p>
+</li>
+</ul>
+<h2 id="Multi-threading-library-in-C"><a href="#Multi-threading-library-in-C" class="headerlink" title="Multi-threading library in C"></a>Multi-threading library in C</h2><p>Thread state</p>
+<ul>
+<li>(就绪) ready</li>
+<li>(阻塞) block</li>
+</ul>
+<h3 id="POSIX-threads"><a href="#POSIX-threads" class="headerlink" title="POSIX threads"></a>POSIX threads</h3><p>You don’t need to care about the architecture behind Multithreading model. Your main aim is to apply multithreading in programming via the library  <code>pthread</code>.</p>
+<blockquote>
+<p>All Pthreads threads have certain properties. Each one has an identifier, a set of registers (including the program counter), and a set of attributes, which are stored in a structure. The attributes include the stack size, scheduling parameters, and other items needed to use the thread.</p>
+</blockquote>
+<p><a href="https://www.includehelp.com/articles/threading-in-c-programming-language-with-gcc-linux.aspx" target="_blank" rel="noopener"><code><pthread.h></pthread.h></code> basic usage</a>:</p>
+<ul>
+<li><p>Create a thread</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *thread, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr, <span class="keyword">void</span> *(*start_routine) (<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>pthread_create()的返回值表示线程创建是否成功</p>
+<p>尽管<code>arg</code>是<code>void*</code>类型的变量，但它同样可以作为任意类型的参数传给<code>start_routine()</code>函数；同时，<code>start_routine()</code>可以返回一个<code>void*</code>类型的返回值，而这个返回值也可以是其他类型，并由<code>pthread_join()</code>获取。</p>
+<p>创建线程成功后，新创建的线程则运行参数三和参数四确定的函数，原来的线程则继续运行下一行代码。</p>
+<ul>
+<li><p><code>pthread_t *thread</code></p>
+<p><code>thread</code> 返回创建的线程ID</p>
+<p>It is the pointer to a <code>pthread_t</code> variable which is used to store thread id of new created thread.</p>
+</li>
+<li><p><code>const pthread_attr_t *attr</code></p>
+<p><code>attr</code>是创建线程时设置的线程属性</p>
+<p><code>attr</code>: An opaque attribute object that may be used to set thread attributes. You can specify a thread attributes object, or NULL for the default values.</p>
+<p>It is the pointer to a thread attribute object which is used to set thread attributes, NULL can be used to create a thread with default arguments.</p>
+<p><code>attr</code>参数是一个结构指针，结构中的元素分别对应着新线程的运行属性，主要包括以下几项：</p>
+<ul>
+<li><code>__detachstate</code></li>
+<li><code>__schedpolicy</code></li>
+<li><code>__schedparam</code></li>
+<li>…</li>
+</ul>
+</li>
+<li><p><code>void *(*start_routine) (void *)</code></p>
+<p>It is the pointer to a thread function; this function contains the code segment which is executed by the thread.</p>
+</li>
+<li><p><code>void *arg</code></p>
+<p>It is the thread functions argument of the type <code>void*</code>, you can pass what is necessary for the function using this parameter.</p>
+</li>
+<li><p><code>int</code> (return type)</p>
+<p>If thread created successfully, return value will be 0 (Zero) otherwise pthread_create will return an error number of type integer.</p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/6990888/c-how-to-create-thread-using-pthread-create-function" target="_blank" rel="noopener">How to create thread using pthread_create</a></p>
+</li>
+</ul>
+</li>
+<li><p>Join a thread</p>
+<p>When the newly-created thread has finished doing it’s bits, we need to join everything back up. This is done by the <code>pthread_join</code> function which takes two parameters: the <code>pthread_t</code> variable used when pthread_create was called (not a pointer this time) and a pointer to the return value pointer (don’t worry about this for now – just set it to NULL). This call will look something like <code>pthread_join(thread0, NULL)</code></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">void</span> **status)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><code>pthread_t</code> is the data type used to uniquely identify a thread.</p>
+<p><code>status</code> contains a pointer to the status argument passed by the ending thread as part of <code>pthread_exit()</code>. If the ending thread terminated with a return, status contains a pointer to the return value. If the thread was canceled, status can be set to -1.</p>
+<p>thread:等待线程的标识符 status:用户定义的指针，用来存储被等待线程的返回值（不为NULL时）</p>
+<p>需要注意的是一个线程仅允许唯一的一个线程使用 <code>pthread_join()</code>等待它的终止，并且被等待的线程应该处于可join状态，即非DETACHED状态。</p>
+</li>
+<li><p>Exit a thread</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_exit</span> <span class="params">(<span class="keyword">void</span> *status)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>Wait</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span> <span class="params">(<span class="keyword">pthread_t</span> tid, <span class="keyword">void</span> ** status)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>Allows the calling thread to wait for the ending of the target thread.</p>
+</li>
+</ul>
+<h3 id="OpenMP"><a href="#OpenMP" class="headerlink" title="OpenMP"></a>OpenMP</h3><p>Running <code>openmp.c</code><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang: error: unsupported option '-fopenmp'</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><a href="https://stackoverflow.com/a/36211162/7583919" target="_blank" rel="noopener">Reason for why</a></p>
+<blockquote>
+<p>You installed <code>gcc</code> with <code>Homebrew</code>, yet the error is from <code>clang</code>. That should simply mean that your default compiler still points to <code>clang</code> instead of the newly installed <code>gcc</code>.</p>
+</blockquote>
+<p>Instead, point those variables to something in <code>/usr/local/bin</code>, e.g.:<br>    </p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> CC=/usr/<span class="built_in">local</span>/bin/gcc</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>and similar for the other two variables, <code>CXX</code> and <code>MPICXX</code>, e.g.:<br>    </p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> CC=/usr/<span class="built_in">local</span>/bin/gcc;CXX=/usr/<span class="built_in">local</span>/bin/g++;MPICXX=/usr/<span class="built_in">local</span>/bin/mpicxx</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="Multithreading-in-CPP"><a href="#Multithreading-in-CPP" class="headerlink" title="Multithreading in CPP"></a>Multithreading in CPP</h2><ul>
+<li><a href="https://hackernoon.com/learn-c-multi-threading-in-5-minutes-8b881c92941f" target="_blank" rel="noopener">Learn C++ Multi-Threading in 5 Minutes</a></li>
+</ul>
+<h2 id="Multithreading-in-Fortran"><a href="#Multithreading-in-Fortran" class="headerlink" title="Multithreading in Fortran"></a>Multithreading in Fortran</h2><p><a href="http://fortranwiki.org/fortran/show/Parallelization" target="_blank" rel="noopener">Various strategies and tools </a>for parallelization of Fortran code using multithreading and/or multiprocessing.</p>
+<ul>
+<li>Co-arrays</li>
+<li><a href="https://complicatedphenomenon.github.io/2019/01/03/High-Performance-Computing/#more" target="_blank" rel="noopener">MPI</a><ul>
+<li>Open MPI</li>
+<li>MPICH</li>
+</ul>
+</li>
+<li><p><a href="https://computing.llnl.gov/tutorials/openMP/" target="_blank" rel="noopener">OpenMP</a></p>
+<p>You must enable OpenMP during compilation.</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gfortran -fopenmp -o omp_par_do omp_par_do.f90</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h2 id="Multithreading-in-Python"><a href="#Multithreading-in-Python" class="headerlink" title="Multithreading in Python"></a>Multithreading in Python</h2><ul>
+<li><code>multiprocessing</code></li>
+<li><code>threading</code></li>
+<li><p><code>concurrent.futures</code></p>
+<ul>
+<li><code>ThreadPoolExecutor</code></li>
+<li><code>ProcessPoolExecutor</code></li>
+</ul>
+<p><code>concurrent.futures</code> abstract away a lot of complicated details about using multiple threads or processes and allows the user to focus on accomplishing the task at hand.</p>
+<p>This is much like Fortran, with the assistant of high level API of <code>coarray</code>, researchers take care the big problems without knowing how <code>coarray</code> is implemented.</p>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>Basic usage, show how it works in a programs, analyze little how it works with hardware</p>
+<ul>
+<li><a href="http://zhangxiaoya.github.io/2015/05/15/multi-thread-of-c-program-language-on-linux/" target="_blank" rel="noopener">Linux 下多线程（C语言）</a></li>
+<li><a href="https://yq.aliyun.com/articles/244354" target="_blank" rel="noopener"><code>pthread_create</code>用法</a></li>
+<li><a href="https://timmurphy.org/2010/05/04/pthreads-in-c-a-minimal-working-example/" target="_blank" rel="noopener">pthreads in C – a minimal working example</a></li>
+</ul>
+<p>Principles behind parallel programming. An original authoritative tutorial:</p>
+<ul>
+<li><p><a href="https://computing.llnl.gov/tutorials/pthreads/" target="_blank" rel="noopener">POSIX Threads Programming</a> by Lawrence Livermore National Laboratory.</p>
+</li>
+<li><p><a href="https://coarrays.sourceforge.io/doc.html" target="_blank" rel="noopener">Parallel programming with Fortran 2008 and 2018 coarrays</a></p>
+</li>
+<li><a href="https://www.gribblelab.org/CBootCamp/A2_Parallel_Programming_in_C.html" target="_blank" rel="noopener">Parallel programming in C</a></li>
+</ul>
+<blockquote id="fn_1">
+<sup>1</sup>. 如果别人要使用你写的库，并不需要知道每个函数内部是怎么实现的。使用的人需要看你的文档或者注释才知道这个函数的入口参数和返回值或者这个函数是用来做什么的。对于用户来说 ，你的这些函数就是API。API(Application Programming Interface应用程序编程接口) 是一些预先定义好的函数，目的是提供应用程序以及开发人员基于某软件或硬件得以访问一组例程的能力。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> ↩</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. 把某些功能封装好，方便其他人调用。调用的人可以很方便使用这些功能，并且可以不需要知道这些功能的具体实现过程。接API就是按照作者规定的流程去调用这些功能。<a href="#reffn_2" title="Jump back to footnote [2] in the text."> ↩</a>
+</blockquote>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HPC/" rel="tag"># HPC</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/Connect-2-personal-computer-via-ssh/" rel="next" title="Connect two personal computers via ssh">
+                <i class="fa fa-chevron-left"></i> Connect two personal computers via ssh
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/23/svn-git-in-action/" rel="prev" title="SVN & Git in action">
+                SVN & Git in action <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-are-threads-scheduled-to-physical-CPUs"><span class="nav-number">1.</span> <span class="nav-text">How are threads scheduled to physical CPUs?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-multithread-your-code-in-C"><span class="nav-number">2.</span> <span class="nav-text">How to multithread your code in C?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-threading-library-in-C"><span class="nav-number">3.</span> <span class="nav-text">Multi-threading library in C</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#POSIX-threads"><span class="nav-number">3.1.</span> <span class="nav-text">POSIX threads</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenMP"><span class="nav-number">3.2.</span> <span class="nav-text">OpenMP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multithreading-in-CPP"><span class="nav-number">4.</span> <span class="nav-text">Multithreading in CPP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multithreading-in-Fortran"><span class="nav-number">5.</span> <span class="nav-text">Multithreading in Fortran</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multithreading-in-Python"><span class="nav-number">6.</span> <span class="nav-text">Multithreading in Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2019/04/21/Multithreading/';
+        this.page.identifier = '2019/04/21/Multithreading/';
+        this.page.title = 'Multithreading principle';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

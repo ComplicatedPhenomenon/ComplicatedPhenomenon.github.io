@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Remove the barrier between different departments of development, test, and deployment, link them together.">
+<meta name="keywords" content="CI &amp; CD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker">
+<meta property="og:url" content="https://complicatedphenomenon.gitlab.io/2018/12/16/Docker/index.html">
+<meta property="og:site_name" content="Find Your Way Out">
+<meta property="og:description" content="Remove the barrier between different departments of development, test, and deployment, link them together.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://media.giphy.com/media/JuNcIKMIY8ozC/giphy.gif">
+<meta property="og:image" content="https://complicatedphenomenon.gitlab.io/uploads/docker-arch.png">
+<meta property="og:updated_time" content="2019-12-07T05:35:44.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker">
+<meta name="twitter:description" content="Remove the barrier between different departments of development, test, and deployment, link them together.">
+<meta name="twitter:image" content="https://media.giphy.com/media/JuNcIKMIY8ozC/giphy.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Find Your Way Out" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://complicatedphenomenon.gitlab.io/2018/12/16/Docker/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Docker | Find Your Way Out</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139244452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139244452-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Find Your Way Out</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-star-half"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-photo"></i> <br>photo</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://complicatedphenomenon.gitlab.io/2018/12/16/Docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ComplicatedPhenomenon">
+      <meta itemprop="description" content="Toward Delicate">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Find Your Way Out">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-16 20:37:13" itemprop="dateCreated datePublished" datetime="2018-12-16T20:37:13+08:00">2018-12-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-07 13:35:44" itemprop="dateModified" datetime="2019-12-07T13:35:44+08:00">2019-12-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/" itemprop="url" rel="index"><span itemprop="name">Technology</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technology/Container/" itemprop="url" rel="index"><span itemprop="name">Container</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/16/Docker/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/16/Docker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">Remove the barrier between different departments of development, test, and deployment, link them together.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://media.giphy.com/media/JuNcIKMIY8ozC/giphy.gif" alt><br>If a software was tested running well under an environment, it only can be declared that there won’t be problem if it were placed in the same environment. What to do if you want to make softwares independent of the operating system?</p>
+<p>Use docker!<br><a id="more"></a></p>
+<p><img src="/uploads/docker-arch.png" alt></p>
+<h1 id="Docker-container-amp-image"><a href="#Docker-container-amp-image" class="headerlink" title="Docker container & image"></a>Docker container & image</h1><blockquote>
+<p>The Docker image is created at build time and the Docker container is created at run time.</p>
+</blockquote>
+<p><a href="https://draveness.me/docker" target="_blank" rel="noopener">https://draveness.me/docker</a></p>
+<h2 id="Containerizing-an-app"><a href="#Containerizing-an-app" class="headerlink" title="Containerizing an app"></a>Containerizing an app</h2><p>Containerize an app to make it run on any computer and OS with one click.</p>
+<blockquote>
+<p>用docker就是解决安全问题啊。现在网易云音乐，Skype都有docker版了。</p>
+</blockquote>
+<p>What does that mean? List some images of apps.</p>
+<ul>
+<li><a href="https://hub.docker.com/r/continuumio/anaconda/" target="_blank" rel="noopener">One of Anaconda docker container image <code>continuumio/anaconda</code>
+</a></li>
+<li><p><a href="https://hub.docker.com/r/aergus/latex/" target="_blank" rel="noopener">One of Latex docker container image <code>aergus/latex</code>
+</a></p>
+<p>An image for building LaTeX projects (based on Debian testing).</p>
+</li>
+<li><a href="https://hub.docker.com/r/fauria/lamp" target="_blank" rel="noopener">One of LAMP docker container image <code>fauria/lamp</code>
+</a></li>
+</ul>
+<p>Does that mean I can run Ubuntu software on openSUSE through <del>docker image</del>?</p>
+<p>Yes!</p>
+<p>Better to take a much simpler application for trying.<br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker image pull library/hello-world</span><br><span class="line">$ docker image ls</span><br><span class="line">$ docker container run hello-world</span><br><span class="line">$ docker run -it ubuntu bash</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><span style="font-family: New York Times; font-size: 1.5em; color: red">Caution:</span> The ambitious try will cost much data flux.</p>
+<h2 id="Docker-image"><a href="#Docker-image" class="headerlink" title="Docker image"></a>Docker image</h2><p>A Docker images is just a bunch of loosely-connected read-only layers.</p>
+<h3 id="Frequently-docker-command"><a href="#Frequently-docker-command" class="headerlink" title="Frequently docker command"></a>Frequently docker command</h3><p>Almost anything worth doing with Docker can be done from the command line. This includes searching Docker Hub for repositories.</p>
+<ul>
+<li><p><code>docker search</code></p>
+<p>How to pull an image with a certain tags?</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/28320134/how-to-list-all-tags-for-a-docker-image-on-a-remote-registry" target="_blank" rel="noopener">How to list all tags for a docker image on a remote registry?</a></li>
+</ul>
+</li>
+<li><p><code>docker pull</code> :</p>
+<p><code>docker pull [OPTIONS] [PATH/]IMAGE_NAME[:TAG]</code></p>
+<ul>
+<li><a href="https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html" target="_blank" rel="noopener">Pushing and Pulling to and from Docker Hub</a></li>
+</ul>
+</li>
+<li><p><code>docker image ls</code></p>
+</li>
+<li><code>docker ps -a</code> list all container(both stopped and running).</li>
+<li><p><code>docker start</code> vs <code>docker run</code> vs <code>docker exec</code></p>
+<p><code>docker restart</code> and <code>docker start</code> is same if the container is already stopped, if the container is not stopped <code>docker restart</code> will issue a stop then a start, therefore, more robust.</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Commands</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start</td>
+<td>Start one or more stopped containers</td>
+</tr>
+<tr>
+<td>run</td>
+<td>Run a command in a new container</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>Run a command in a running container</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><code>docker tag IMAGE ID image/TAG</code></li>
+<li><code>docker build</code></li>
+<li><code>docker push</code></li>
+<li><p><code>docker logs -f <container name></container></code></p>
+<p>In some case, you can only debug in the container, then check logs for a container.</p>
+</li>
+</ul>
+<h3 id="A-demo-practice"><a href="#A-demo-practice" class="headerlink" title="A demo practice"></a>A demo practice</h3><p><a href="https://zhuanlan.zhihu.com/p/23599229" target="_blank" rel="noopener">A tutorial for docker easy to work on</a><br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ docker image ls</span><br><span class="line">rootproject/root-ubuntu16   latest              b16855622aac        6 months ago        1.6GB</span><br><span class="line">$ docker image rm 525bd2016729 <span class="comment"># Delete docker image</span></span><br><span class="line">$ docker ps -a <span class="comment">#查看docker中运行的容器 docker ps shows just running.</span></span><br><span class="line">$ docker container rm 269d3226bd30 688b0e6769bb 29e7da4384b7 282feca36cd4  bb3d75432292 07078d6859b7 <span class="comment"># Delete stopped container</span></span><br><span class="line">$ docker container ls -a</span><br><span class="line">$ docker container stop a800bba81e0f 18f134b0452a <span class="comment"># stop before remove</span></span><br><span class="line">$ docker container rm a800bba81e0f 18f134b0452a</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>The image is incredibly big depending on the fact that <code>WordPress.zip</code> is around 10MB. It’s not convenient to push a big image tarball to Docker Hub.</p>
+<p><strong>Q:</strong> Why the image is so big?</p>
+<p><strong>A:</strong> Images include all the layers and each layer includes all the dependencies for what you installed.</p>
+<h3 id="Where-to-find-the-docker-image-file"><a href="#Where-to-find-the-docker-image-file" class="headerlink" title="Where to find the docker image file?"></a>Where to find the docker image file?</h3><ul>
+<li><a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker Hub</a></li>
+<li><a href="https://github.com/oracle/docker-images" target="_blank" rel="noopener">Docker images</a><br>Official source for Docker configurations, images, and examples of Docker files for <strong>Oracle products and projects</strong></li>
+</ul>
+<h2 id="Docker-container"><a href="#Docker-container" class="headerlink" title="Docker container"></a>Docker container</h2><blockquote>
+<p>Containers could easily be understood through the concept of virtual machines. Similar to virtual machines, containers provide security by running<br>separate instances of operating systems simultaneously with no interaction with each other.</p>
+</blockquote>
+<h3 id="Run-docker-Wordpress"><a href="#Run-docker-Wordpress" class="headerlink" title="Run docker Wordpress"></a>Run docker Wordpress</h3><p><em>Reference</em>:</p>
+<ul>
+<li><a href="https://www.hostinger.com/tutorials/run-docker-wordpress" target="_blank" rel="noopener">A more detailed guild</a>. There are bunch of similar brief guide. E.g. <a href="https://themeisle.com/blog/local-wordpress-development-using-docker/" target="_blank" rel="noopener">ref1</a>, <a href="https://www.serverlab.ca/tutorials/osx/wordpress-development-on-osx-using-docker/" target="_blank" rel="noopener">ref2</a>, <a href="https://www.adrianprieto.com/wordpress-development-with-docker-in-5-steps/" target="_blank" rel="noopener">ref3</a>.</li>
+<li><a href="https://www.linode.com/docs/quick-answers/linux/wordpress-with-docker-compose/" target="_blank" rel="noopener">WordPress with  docker compose</a>.</li>
+</ul>
+<p>The Compose file is a YAML file defining services, networks and volumes.<br><code>docker-compose.yml</code></p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">   db:</span></span><br><span class="line"><span class="attr">     image:</span> <span class="attr">mysql:5.7</span></span><br><span class="line"><span class="attr">     volumes:</span></span><br><span class="line"><span class="attr">       - db_data:</span><span class="string">/var/lib/mysql</span></span><br><span class="line"><span class="attr">     restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">     environment:</span></span><br><span class="line"><span class="attr">       MYSQL_ROOT_PASSWORD:</span> <span class="string">somewordpress</span></span><br><span class="line"><span class="attr">       MYSQL_DATABASE:</span> <span class="string">wordpress</span></span><br><span class="line"><span class="attr">       MYSQL_USER:</span> <span class="string">wordpress</span></span><br><span class="line"><span class="attr">       MYSQL_PASSWORD:</span> <span class="string">wordpress</span></span><br><span class="line"></span><br><span class="line"><span class="attr">   wordpress:</span></span><br><span class="line"><span class="attr">     depends_on:</span></span><br><span class="line"><span class="bullet">       -</span> <span class="string">db</span></span><br><span class="line"><span class="attr">     image:</span> <span class="attr">wordpress:5.1.0-apache</span></span><br><span class="line"><span class="attr">     ports:</span></span><br><span class="line"><span class="bullet">       -</span> <span class="string">"8000:80"</span></span><br><span class="line"><span class="attr">     restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">     environment:</span></span><br><span class="line"><span class="attr">       WORDPRESS_DB_HOST:</span> <span class="attr">db:3306</span></span><br><span class="line"><span class="attr">       WORDPRESS_DB_USER:</span> <span class="string">wordpress</span></span><br><span class="line"><span class="attr">       WORDPRESS_DB_PASSWORD:</span> <span class="string">wordpress</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="attr">    db_data:</span></span><br></pre></td></tr></tbody></table></figure>
+<p><em>Confusion</em>:</p>
+<ul>
+<li>What is directory  <code>/var/lib/mysql</code> refers to?</li>
+<li>Where is the local image?</li>
+<li>2 containers will be involved, one (MySQL) runs the database, the other (PHP with Apache?) runs web server.</li>
+</ul>
+<p>The command <code>docker-compose up</code> will run docker-compose in the foreground. If you would rather run it as a background process, you use the <code>-d</code> flag<br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose up -d</span><br><span class="line">$ docker image inspect mysql:5.7</span><br><span class="line">$ docker-compose ps</span><br></pre></td></tr></tbody></table></figure><p></p>
+<blockquote>
+<p>When a Docker container is stopped, it is also deleted; this is how Docker is designed to work. However, your WordPress files and data will be preserved, as the <code>docker-compose.yml</code> file was configured to create persistent named volumes for that data.</p>
+<p>If you want to remove this data and start over with your WordPress site, you can add the —volumes flag to the previous command. This will permanently delete the WordPress posts and customizations you’ve made so far.</p>
+</blockquote>
+<p>Then the question becomes how do I create a new docker images for my applications?</p>
+<h3 id="Create-a-new-docker-images-for-your-applications"><a href="#Create-a-new-docker-images-for-your-applications" class="headerlink" title="Create a new docker images for your applications"></a>Create a new docker images for your applications</h3><ul>
+<li><p>Why should I dockerize my WordPress sites?</p>
+<p><a href="https://buddy.works/guides/wordpress-docker-kubernetes-part-1" target="_blank" rel="noopener">Dockerize WordPress and make it run on any computer and OS with one click</a>.</p>
+</li>
+<li>Forthe aim of sharing the app, pushing WordPress to Docker Hub.</li>
+</ul>
+<p><a href="https://stackoverflow.com/questions/54956822/how-to-convert-wordpress-container-into-image" target="_blank" rel="noopener">Asking this question on SO</a>.</p>
+<h3 id="Run-valgrind-container"><a href="#Run-valgrind-container" class="headerlink" title="Run valgrind container"></a>Run <code>valgrind</code> container</h3><p><strong>Since valgrind is not available to newest version of OSX, Then it is a smart approach to test my code in a container.</strong></p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull etews/gcc-expect-valgrind</span><br><span class="line">$ docker run -it etews/gcc-expect-valgrind</span><br><span class="line">root@3da290baa6cd:/<span class="comment"># gcc</span></span><br><span class="line">gcc: fatal error: no input files</span><br><span class="line">compilation terminated.</span><br><span class="line">root@3da290baa6cd:/<span class="comment"># valgrind</span></span><br><span class="line">valgrind: no program specified</span><br><span class="line">valgrind: Use --<span class="built_in">help</span> <span class="keyword">for</span> more information.</span><br><span class="line">root@b473564baa16:/<span class="comment"># cat /etc/os-release</span></span><br><span class="line">PRETTY_NAME=<span class="string">"Debian GNU/Linux 9 (stretch)"</span></span><br><span class="line">NAME=<span class="string">"Debian GNU/Linux"</span></span><br><span class="line">VERSION_ID=<span class="string">"9"</span></span><br><span class="line">VERSION=<span class="string">"9 (stretch)"</span></span><br><span class="line">ID=debian</span><br><span class="line">HOME_URL=<span class="string">"https://www.debian.org/"</span></span><br><span class="line">SUPPORT_URL=<span class="string">"https://www.debian.org/support"</span></span><br><span class="line">BUG_REPORT_URL=<span class="string">"https://bugs.debian.org/"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>A very serious issue: Does an image contain an OS? If that so, that doesn’t make sense as it cost so much space in hard disk.</p>
+<p>If you need several software, for example</p>
+<ul>
+<li>Valgrind</li>
+<li>Root<br>That means I installed not only Ubuntu but also Debian.</li>
+</ul>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line">$ docker run -it etews/gcc-expect-valgrind</span><br><span class="line">root@11742d1bd167:/<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></tbody></table></figure>
+<p><em>I can see a container is running behind, how I can run it interactively again?</em></p>
+<p>Clearly you want to run a command in a running container,  <code>docker exec -it etews/gcc-expect-valgrind</code> will do.</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/working-with-docker-containers" target="_blank" rel="noopener">Working with Docker Containers</a></li>
+<li><a href="https://medium.com/@nagarwal/lifecycle-of-docker-container-d2da9f85959" target="_blank" rel="noopener">Lifecycle of Docker Container</a></li>
+</ul>
+<h3 id="Customize-the-Debian-OS-container"><a href="#Customize-the-Debian-OS-container" class="headerlink" title="Customize the Debian OS container"></a>Customize the Debian OS container</h3><ul>
+<li>Install vim.</li>
+<li>Customize and colorize vim. <a href="git@github.com:amix/vimrc.git">The ultimate Vim configuration: vimrc</a></li>
+<li>Customize and colorize <code>.bashrc</code>.<ul>
+<li><a href="https://unix.stackexchange.com/questions/148/colorizing-your-terminal-and-shell-environment#" target="_blank" rel="noopener">A nice configuration example</a>  </li>
+<li>Visit <a href="http://bashrcgenerator.com/" target="_blank" rel="noopener">http://bashrcgenerator.com</a></li>
+<li><a href="https://github.com/Bash-it/bash-it" target="_blank" rel="noopener">A community Bash framework</a> 📌💯</li>
+</ul>
+</li>
+</ul>
+<p>After customizing the OS as a working environment , then make this container as an image.</p>
+<h3 id="Share-data-between-the-host-machine-and-the-container"><a href="#Share-data-between-the-host-machine-and-the-container" class="headerlink" title="Share data between the host machine and the container"></a>Share data between the host machine and the container</h3><ul>
+<li><a href="https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container" target="_blank" rel="noopener">Copying files from host to Docker container</a><ul>
+<li><code>docker cp FromPath containerID:ToPATH</code></li>
+<li><code>docker cp mycontainer:FromPath ToPATH</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Run-golang"><a href="#Run-golang" class="headerlink" title="Run golang"></a>Run <code>golang</code></h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">○ → docker run -it golang</span><br><span class="line">root@fe3971cd0f6b:/go<span class="comment"># ls</span></span><br><span class="line">bin  src</span><br><span class="line">root@fe3971cd0f6b:/<span class="comment"># cat /etc/os-release</span></span><br><span class="line">PRETTY_NAME=<span class="string">"Debian GNU/Linux 9 (stretch)"</span></span><br><span class="line">NAME=<span class="string">"Debian GNU/Linux"</span></span><br><span class="line">VERSION_ID=<span class="string">"9"</span></span><br><span class="line">VERSION=<span class="string">"9 (stretch)"</span></span><br><span class="line">ID=debian</span><br><span class="line">HOME_URL=<span class="string">"https://www.debian.org/"</span></span><br><span class="line">SUPPORT_URL=<span class="string">"https://www.debian.org/support"</span></span><br><span class="line">BUG_REPORT_URL=<span class="string">"https://bugs.debian.org/"</span></span><br><span class="line">root@fe3971cd0f6b:/<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Then you see, for saving cost of space, I should install <code>golang</code> in container <code>valgrind</code> as it runs on the same OS as <code>golang</code>.</p>
+<h2 id="How-to-write-Dockerfile"><a href="#How-to-write-Dockerfile" class="headerlink" title="How to write Dockerfile?"></a>How to write <code>Dockerfile</code>?</h2><p>Dockerfile可以理解为一种配置文件，用来告诉docker build命令应该执行哪些操作。</p>
+<h3 id="Dockerfile-instructions"><a href="#Dockerfile-instructions" class="headerlink" title="Dockerfile instructions"></a>Dockerfile instructions</h3><p><code>RUN</code> —runs a command and creates an image layer. Used to install packages into containers.</p>
+<p>This is also the process of building an environment.</p>
+<ul>
+<li><a href="https://towardsdatascience.com/learn-enough-docker-to-be-useful-b0b44222eef5" target="_blank" rel="noopener">A detailed explanation on Dockerfile</a>.</li>
+</ul>
+<h3 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a><code>docker-compose.yml</code></h3><h2 id="Docker-Reference"><a href="#Docker-Reference" class="headerlink" title="Docker Reference"></a>Docker Reference</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">Docker tutorial in Chinese</a></li>
+<li><a href="https://www.jianshu.com/p/8408e06b7273" target="_blank" rel="noopener">Ways to import and export image</a></li>
+<li><a href="https://docker-curriculum.com/#docker-run" target="_blank" rel="noopener">https://docker-curriculum.com/#docker-run</a></li>
+</ul>
+<p>The architecture of a new technology is innovative, that’s why makes itself valuable. For common users, better to catch up with the cutting edge technology, as even though it’s hard to be original but it’s easy to follow up.</p>
+<h1 id="nvidia-docker"><a href="#nvidia-docker" class="headerlink" title="nvidia-docker"></a>nvidia-docker</h1><p><code>nvidia-docker</code> enables you build and run Docker containers leveraging NVIDIA GPUs. before using it, make sure you have installed the NVIDIA driver and a supported version of Docker for your distribution.</p>
+<p>Try a demo.</p>
+<ol>
+<li>Pull down the nvidia-docker container to the system<br><code>$ docker pull nvrc.io/nvidia/tensorflow:17.06</code></li>
+<li>Use <code>nvidia-docker</code> to ensure that the correct NVIDIA drivers and libraries are used.<ul>
+<li><a href="https://docs.nvidia.com/deeplearning/frameworks/bp-docker/index.html#running" target="_blank" rel="noopener">Offcial guide</a></li>
+</ul>
+</li>
+</ol>
+<h1 id="openSUSE-Kubic"><a href="#openSUSE-Kubic" class="headerlink" title="openSUSE Kubic"></a>openSUSE Kubic</h1><p><a href="https://news.opensuse.org/2017/05/29/introducing-kubic-project-a-new-open-source-project/" target="_blank" rel="noopener">Rethink the OS for modern IT applications, and basically are hoping to build a next-generation container operating system.</a></p>
+<h1 id="Fedora-boxes"><a href="#Fedora-boxes" class="headerlink" title="Fedora boxes"></a>Fedora boxes</h1><h1 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h1><blockquote>
+<p>真实的生产环境应用会包含多个容器，而这些容器还很可能会跨越多个服务器主机部署。Kubernetes 提供了为那些工作负载大规模部署容器的编排与管理能力。Kubernetes 编排让你能够构建多容器的应用服务，在集群上调度或伸缩这些容器，以及管理它们随时间变化的健康状态。</p>
+</blockquote>
+<p>编排系统（orchestration）</p>
+<ul>
+<li><a href="http://kubernetesbyexample.com" target="_blank" rel="noopener">A hands-on introduction to Kubernetes</a>.</li>
+</ul>
+<h2 id="First-impression"><a href="#First-impression" class="headerlink" title="First impression"></a>First impression</h2><ul>
+<li>Kubectl is a command line interface for running commands against Kubernetes clusters.</li>
+<li>A pod is a collection of containers sharing a network and mount namespace and is the basic unit of deployment in Kubernetes.</li>
+<li>Labels are the mechanism you use to organize Kubernetes objects</li>
+</ul>
+<h2 id="More-about-Kubernetes"><a href="#More-about-Kubernetes" class="headerlink" title="More about Kubernetes"></a>More about Kubernetes</h2><ul>
+<li><a href="https://blog.kubernauts.io/ci-cd-on-kubernetes-with-gitlab-46d2a92b3565" target="_blank" rel="noopener">CI/CD on Kubernetes with GitLab</a></li>
+<li><a href="https://github.com/answer1991/articles/blob/master/Kubernetes-is-the-next-generation-os.md" target="_blank" rel="noopener">Introduction on Kubernetes</a></li>
+</ul>
+<p><span style="font-family: papyrus; font-size:1.5em; color: red"><br>Contents remains to be continued …
+</span></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CI-CD/" rel="tag"># CI & CD</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/19/Graphviz/" rel="next" title="Graphviz">
+                <i class="fa fa-chevron-left"></i> Graphviz
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/16/Open-Source-Spirit/" rel="prev" title="Open Source Spirit">
+                Open Source Spirit <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="ComplicatedPhenomenon">
+            
+              <p class="site-author-name" itemprop="name">ComplicatedPhenomenon</p>
+              <p class="site-description motion-element" itemprop="description">Toward Delicate</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ComplicatedPhenomenon" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitlab.com/ComplicatedPhenomenon" target="_blank" title="Gitlab"><i class="fa fa-fw fa-gitlab"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://czfzdxx.gitlab.io" target="_blank" title="Physics"><i class="fa fa-fw fa-fort-awesome"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://heynoturningback.gitlab.io" target="_blank" title="Life"><i class="fa fa-fw fa-grav"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/users/7583919/complicatedphenomenon" target="_blank" title="SO"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wm.nizaina@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/czfzdxx" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-container-amp-image"><span class="nav-number">1.</span> <span class="nav-text">Docker container &amp; image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Containerizing-an-app"><span class="nav-number">1.1.</span> <span class="nav-text">Containerizing an app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-image"><span class="nav-number">1.2.</span> <span class="nav-text">Docker image</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Frequently-docker-command"><span class="nav-number">1.2.1.</span> <span class="nav-text">Frequently docker command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-demo-practice"><span class="nav-number">1.2.2.</span> <span class="nav-text">A demo practice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Where-to-find-the-docker-image-file"><span class="nav-number">1.2.3.</span> <span class="nav-text">Where to find the docker image file?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-container"><span class="nav-number">1.3.</span> <span class="nav-text">Docker container</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-docker-Wordpress"><span class="nav-number">1.3.1.</span> <span class="nav-text">Run docker Wordpress</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-docker-images-for-your-applications"><span class="nav-number">1.3.2.</span> <span class="nav-text">Create a new docker images for your applications</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-valgrind-container"><span class="nav-number">1.3.3.</span> <span class="nav-text">Run valgrind container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Customize-the-Debian-OS-container"><span class="nav-number">1.3.4.</span> <span class="nav-text">Customize the Debian OS container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Share-data-between-the-host-machine-and-the-container"><span class="nav-number">1.3.5.</span> <span class="nav-text">Share data between the host machine and the container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-golang"><span class="nav-number">1.3.6.</span> <span class="nav-text">Run golang</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-write-Dockerfile"><span class="nav-number">1.4.</span> <span class="nav-text">How to write Dockerfile?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile-instructions"><span class="nav-number">1.4.1.</span> <span class="nav-text">Dockerfile instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose-yml"><span class="nav-number">1.4.2.</span> <span class="nav-text">docker-compose.yml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Reference"><span class="nav-number">1.5.</span> <span class="nav-text">Docker Reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nvidia-docker"><span class="nav-number">2.</span> <span class="nav-text">nvidia-docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#openSUSE-Kubic"><span class="nav-number">3.</span> <span class="nav-text">openSUSE Kubic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fedora-boxes"><span class="nav-number">4.</span> <span class="nav-text">Fedora boxes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kubernetes"><span class="nav-number">5.</span> <span class="nav-text">Kubernetes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#First-impression"><span class="nav-number">5.1.</span> <span class="nav-text">First impression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More-about-Kubernetes"><span class="nav-number">5.2.</span> <span class="nav-text">More about Kubernetes</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maintined by ComplicatedPhenomenon</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<div id="days"></div>
+
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/19/1992 06:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML= daysold+" days "+hrsold+" hours "+minsold+" minutes "+seconds+" seconds";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://https-complicatedphenomenon-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://complicatedphenomenon.gitlab.io/2018/12/16/Docker/';
+        this.page.identifier = '2018/12/16/Docker/';
+        this.page.title = 'Docker';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-complicatedphenomenon-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
